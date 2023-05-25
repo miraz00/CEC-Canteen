@@ -12,14 +12,14 @@
             height: 100%;
         }
     </style>
-    <title>Welcome | EATERIO</title>
+    <title>Welcome | CEC CANTEEN</title>
 </head>
 
 <body class="container flex-column " style="height: 600px;">
 
     <?php include('nav_header.php')?>
     
-    <div class=" container g-5 bck-header bg-dark max-height: 100% ">
+    <div class=" container g-5 bck-header bg-dark max-height: 100%" style="margin-top: 2rem;">
         <div class="row align-items-center text-white mt-3 g-3">
         <h1 class="display-1  text-white fw-bold">CEC<br>CANTEEN</h1>
             <p class="lead fw-light">Digital Canteen Application for CECians</p>
