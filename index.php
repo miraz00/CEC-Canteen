@@ -20,8 +20,8 @@
     <?php include('nav_header.php')?>
     
     <div class="g-5 bck-header bg-dark ">
-        <div class="wrapper row align-items-center text-white mt-3 g-3">
-        <h1 class="typing-demo  display-1  text-white fw-bold">CEC CANTEEN</h1>
+        <div class="row align-items-center text-white mt-3 g-3">
+        <h1 class="wrapper typing-demo  display-1  text-white fw-bold">CEC CANTEEN</h1>
             
             
     </div>

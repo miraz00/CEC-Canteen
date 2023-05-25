@@ -55,7 +55,7 @@ a{
 
 
 .wrapper {
-    height: 100%;
+    height: 500px;
     /*This part is important for centering*/
     display: grid;
     place-items: center;
