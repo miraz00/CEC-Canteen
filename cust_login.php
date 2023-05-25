@@ -28,7 +28,7 @@
         </aside>
         <section>
             <h1>
-                log in
+                Log In
             </h1>
             <form id="form-signup" class="active">
                 <div style="margin-top: 5.5rem;">
