@@ -29,7 +29,7 @@
         </aside>
         <section>
             <h1>
-                sign up
+                Sign Up
             </h1>
             <form id="form-signup" class="active">
                 <div class="accounttype" style="margin-top: 3rem; height: 0px;">

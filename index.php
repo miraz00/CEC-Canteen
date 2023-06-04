@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php session_start(); include("connection.php"); include('head.php');?>
+    <?php session_start(); include("conn_db.php"); include('head.php');?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +15,17 @@
     <title>Welcome | CEC CANTEEN</title>
 </head>
 
-<body class="container flex-column " style="height: 600px;">
+<body class="flex-column " style="height: 600px;">
 
     <?php include('nav_header.php')?>
     
-    <div class=" container g-5 bck-header bg-dark max-height: 100%" style="margin-top: 2rem;">
+    <div class="g-5 bck-header bg-dark ">
         <div class="row align-items-center text-white mt-3 g-3">
-        <h1 class="display-1  text-white fw-bold">CEC<br>CANTEEN</h1>
-            <p class="lead fw-light">Digital Canteen Application for CECians</p>
+        <h1 class="wrapper typing-demo  display-1  text-white fw-bold">CEC CANTEEN</h1>
             
-        </div>
+            
     </div>
+</div>
 
 <!-- Service Start -->
 <div class="container-xxl py-5">
