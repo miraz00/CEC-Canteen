@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php session_start(); include("conn_db.php");?>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/login.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
-    <script src="js/login.js" defer></script>
-
-    <title>Customer Log In | CEC CANTEEN</title>
-</head>
-
 <body>
     <main ontouchstart class="with-hover">
         <aside>
@@ -23,15 +8,22 @@
                 </g>
             </svg>
             <div>
-                <p id="intro-signup" class="active">Welcome back to<br/><strong>CEC Canteen</strong>!</p>
+                <p id="intro-signup" class="active"><strong>CEC Canteen</strong> is even better with&nbsp;an&nbsp;account.</p>
+                <p id="intro-login">Welcome back to<br/><strong>CEC Canteen</strong>!</p>
             </div>
         </aside>
         <section>
             <h1>
-                Log In
+                Sign Up
             </h1>
             <form id="form-signup" class="active">
-                <div style="margin-top: 5.5rem;">
+                <div class="accounttype" style="margin-top: 3rem; height: 0px;">
+                    <input type="radio" value="student" id="radioOne" name="account" checked/>
+                    <label for="radioOne" class="radio" chec>Student</label>
+                    <input type="radio" value="teacher" id="radioTwo" name="account" />
+                    <label for="radioTwo" class="radio">Teacher</label>
+                </div>
+                <div>
                     <fieldset>
                         <div>
                             <label for="name">Username</label>
@@ -44,10 +36,15 @@
                             <input id="password" name="password" type="password" required/>
                         </div>
                     </fieldset>
+                    <fieldset>
+                        <div>
+                            <label for="confirm_password" style="white-space: nowrap";>Confirm Password</label>
+                            <input id="confirm_password" name="confirm_password" type="confirm_password" required/>
+                        </div>
+                    </fieldset>
                 </div>
-                <input type="submit" value="Log In"/>
+                <input type="submit" value="Sign Up"/>
             </form>
         </section>
     </main>
-</body>
 
