@@ -1,5 +1,5 @@
 <body>
-    <main ontouchstart class="with-hover">
+    <main ontouchstart class="with-hover log">
         <aside>
             <div></div>
             <svg viewBox="0 0 100 100">
@@ -15,12 +15,17 @@
             <h1>
                 Log In
             </h1>
-            <form id="form-signup" class="active">
+            <form id="form-signup" class="active" method="post">
                 <div style="margin-top: 5.5rem;">
+                    <?php if(isset($message)) :
+                        if ($message=="Registered Successfully!") : ?>
+                            <span style="color:Green;display: flex;justify-content: center;" class="msg"><?= $message ?></span>
+                        <?php endif ?>
+                    <?php endif ?>
                     <fieldset>
                         <div>
-                            <label for="name">Username</label>
-                            <input id="name" name="name" type="text" autofocus required/>
+                            <label for="username">Username</label>
+                            <input id="username" name="username" type="text" autofocus required/>
                         </div>
                     </fieldset>
                     <fieldset>
@@ -29,7 +34,11 @@
                             <input id="password" name="password" type="password" required/>
                         </div>
                     </fieldset>
+                    <?php if(isset($message) && $message!="Registered Successfully!") :?>
+                        <span style="color:red;display: flex;justify-content: center;" class="msg"><?= $message ?></span>
+                    <?php endif ?>
                 </div>
+                <input type="hidden" name="action" value="login"/>
                 <input type="submit" value="Log In"/>
             </form>
         </section>

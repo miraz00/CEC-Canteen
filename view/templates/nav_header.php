@@ -16,15 +16,26 @@
                 <li class="nav-item">
                     <a href="#food_menu" class="nav-link px-2 text-dark">Menu List</a>
                 </li>
-                <?php if (!isset($_SESSION['user'])): ?>
+                <?php if (!isset($_SESSION['user_id'])): ?>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="register" style="display: flex">
-                        <input type="hidden" name="action" value="login_page">
+                        <input type="hidden" name="action" value="register_page">
                         <a class="btn btn-dark btn-sm me-2" href="javascript:$('#register').submit(); ">Sign Up</a>
                     </form>
 
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="login" style="display: flex">
-                        <input type="hidden" name="action" value="register_page">
+                        <input type="hidden" name="action" value="login_page">
                         <a class="btn btn-dark btn-sm" href="javascript:$('#login').submit(); " >Log In</a>
+                    </form>
+                <?php else: ?>
+                    <span style="display: flex;align-items: center;">&nbsp;&nbsp;&nbsp;&nbsp;Welcome, <?= $_SESSION['name'] ?>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <?php if(isset($_SESSION['tokens'])): ?>
+                        <button type="button" class="btn btn-primary">
+                            Tokens <span class="badge badge-light" style="background-color: brown;"><?= $_SESSION['tokens'] ?></span>
+                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php endif ?>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="logout" style="display: flex">
+                        <input type="hidden" name="action" value="logout">
+                        <a class="btn btn-dark btn-sm me-2" href="javascript:$('#logout').submit(); ">Log Out</a>
                     </form>
                 <?php endif ?>
             </ul>
