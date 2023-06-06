@@ -13,7 +13,7 @@ setTimeout(function() {
   }, 50);
 }, 3000);
 
-document.querySelector("h1 a").addEventListener("click", function() {
+document.querySelector("h1").addEventListener("click", function() {
   var siblings = Array.from(this.parentNode.children);
 
   siblings.forEach(function(element) {
@@ -40,3 +40,5 @@ document.querySelector("h1 a").addEventListener("click", function() {
     }, 50);
   }
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////

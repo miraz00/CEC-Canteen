@@ -8,24 +8,36 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="navbarCollapse">
+        <div class="navbar navbar-expand" id="navbarCollapse">
             <ul class="navbar-nav ms-auto ">
-                <li class="nav-item ">
-                    <a class="nav-link px-2 text-dark" href="<?= $_SERVER['PHP_SELF'] ?> ">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#food_menu" class="nav-link px-2 text-dark">Menu List</a>
-                </li>
-                <?php if (!isset($_SESSION['user'])): ?>
+
+                    <a class="btn btn-dark w-75 me-4 rounded-pill" href="<?= $_SERVER['PHP_SELF'] ?> ">Home</a>
+
+
+                    <a href="#food_menu" class="btn btn-dark w-75 me-4 rounded-pill">Menu</a>
+
+                <?php if (!isset($_SESSION['user_id'])): ?>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="register" style="display: flex">
-                        <input type="hidden" name="action" value="login_page">
-                        <a class="btn btn-dark btn-sm me-2" href="javascript:$('#register').submit(); ">Sign Up</a>
+                        <input type="hidden" name="action" value="register_page">
+                        <a class="btn btn-dark w-75 me-4 rounded-pill" href="javascript:$('#register').submit(); ">SignUp</a>
                     </form>
 
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="login" style="display: flex">
-                        <input type="hidden" name="action" value="register_page">
-                        <a class="btn btn-dark btn-sm" href="javascript:$('#login').submit(); " >Log In</a>
+                        <input type="hidden" name="action" value="login_page">
+                        <a class="btn btn-dark w-75 me-4 rounded-pill" href="javascript:$('#login').submit(); " >LogIn</a>
                     </form>
+                <?php else: ?>
+                    <span class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;"><i class="fas fa-user-circle" style="font-size:25px"></i>&nbsp;Profile</span>
+
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="logout" style="display: flex">
+                        <input type="hidden" name="action" value="logout">
+                        <a class="btn btn-dark w-75 me-4 rounded-pill" href="javascript:$('#logout').submit(); ">LogOut</a>
+                    </form>
+                    <?php if(isset($_SESSION['tokens'])): ?>
+                        <button type="button" class="btn btn-primary">
+                            Tokens <span class="badge badge-light" style="background-color: brown;"><?= $_SESSION['tokens'] ?></span>
+                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php endif ?>
                 <?php endif ?>
             </ul>
         </div>

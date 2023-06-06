@@ -16,32 +16,52 @@
             <h1>
                 Sign Up
             </h1>
-            <form id="form-signup" class="active">
-                <div class="accounttype" style="margin-top: 3rem; height: 0px;">
-                    <input type="radio" value="student" id="radioOne" name="account" checked/>
-                    <label for="radioOne" class="radio" chec>Student</label>
-                    <input type="radio" value="teacher" id="radioTwo" name="account" />
-                    <label for="radioTwo" class="radio">Teacher</label>
+            <form id="form-signup" class="active" method="post" action="<?= $_SERVER['PHP_SELF'] ?>">
+                <div class="accounttype" style="display: flex;margin-top: 1rem; justify-content: space-evenly;">
+                    <div style="margin: 0; padding: 0; display: inline">
+                        <input type="radio" value="student" id="radioOne" name="account" checked/>
+                        <label for="radioOne" class="radio">Student</label>
+                    </div>
+                    <div style="padding: 0; margin: 0; display: inline">
+                        <input type="radio" value="teacher" id="radioTwo" name="account" />
+                        <label for="radioTwo" class="radio">Teacher</label>
+                    </div>
                 </div>
                 <div>
                     <fieldset>
                         <div>
-                            <label for="name">Username</label>
-                            <input id="name" name="name" type="text" autofocus required/>
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email"/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text"/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <label for="username">Username</label>
+                            <input id="username" name="username" type="text"/>
                         </div>
                     </fieldset>
                     <fieldset>
                         <div>
                             <label for="password" >Password</label>
-                            <input id="password" name="password" type="password" required/>
+                            <input id="password" name="password" type="password"/>
                         </div>
                     </fieldset>
                     <fieldset>
                         <div>
-                            <label for="confirm_password" style="white-space: nowrap";>Confirm Password</label>
-                            <input id="confirm_password" name="confirm_password" type="confirm_password" required/>
+                            <label for="confirm_password" style="white-space: nowrap">Confirm Password</label>
+                            <input id="confirm_password" name="confirm_password" type="password"/>
                         </div>
                     </fieldset>
+                    <input type="hidden" name="action" value="register">
+                    <?php if(isset($message)) :?>
+                        <span style="color:red;display: flex;justify-content: center;" class="msg"><?= $message ?></span>
+                    <?php endif ?>
                 </div>
                 <input type="submit" value="Sign Up"/>
             </form>
