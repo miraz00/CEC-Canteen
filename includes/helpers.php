@@ -92,5 +92,13 @@ function send_message($email, $name)
         return $verification_code;
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return false;
     }
+}
+
+function redirect_order_history(): void
+{
+    render("templates/header", ["title" => "Order History"]);
+    render("history");
+    render("templates/footer");
 }

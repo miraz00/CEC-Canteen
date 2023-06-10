@@ -60,7 +60,9 @@
                     </fieldset>
                     <input type="hidden" name="action" value="register">
                     <?php if(isset($message)) :?>
-                        <span style="color:red;display: flex;justify-content: center;" class="msg"><?= $message ?></span>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $message ?>
+                        </div>
                     <?php endif ?>
                 </div>
                 <input type="submit" value="Sign Up"/>

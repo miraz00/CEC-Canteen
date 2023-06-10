@@ -30,47 +30,44 @@ function check_email($email): bool
     return false;
 }
 
-function add_student($name, $email, $username, $password)
+function add_student($name, $email, $username, $password): bool
 {
     global $db;
     $query = 'insert into users(name, email, username, password, tokens) values(:name, :email, :username, :password, 0)';
+    return extracted($db, $query, $username, $name, $email, $password);
+}
+
+/**
+ * @param PDO $db
+ * @param string $query
+ * @param $username
+ * @param $name
+ * @param $email
+ * @param $password
+ * @return bool
+ */
+function extracted(PDO $db, string $query, $username, $name, $email, $password): bool
+{
     $statement = $db->prepare($query);
     $statement->bindvalue(':username', $username);
     $statement->bindvalue(':name', $name);
     $statement->bindvalue(':email', $email);
     $statement->bindvalue(':password', $password);
-    try
-    {
+    try {
         $statement->execute();
         $statement->closeCursor();
-    }
-    catch (PDOException $e)
-    {
+    } catch (PDOException $e) {
         echo $e;
         return false;
     }
     return true;
 }
-function add_teacher($name, $email, $username, $password)
+
+function add_teacher($name, $email, $username, $password): bool
 {
     global $db;
     $query = 'insert into users(name, email, username, password) values(:name, :email, :username, :password)';
-    $statement = $db->prepare($query);
-    $statement->bindvalue(':username', $username);
-    $statement->bindvalue(':name', $name);
-    $statement->bindvalue(':email', $email);
-    $statement->bindvalue(':password', $password);
-    try
-    {
-        $statement->execute();
-        $statement->closeCursor();
-    }
-    catch (PDOException $e)
-    {
-        echo $e;
-        return false;
-    }
-    return true;
+    return extracted($db, $query, $username, $name, $email, $password);
 }
 
 function check($username, $password): bool
@@ -92,4 +89,28 @@ function check($username, $password): bool
         return true;
     }
     return false;
+}
+
+function user_details($username): array
+{
+    global $db;
+    $query = 'select * from users where username = :username';
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':username', $username);
+    $statement->execute();
+    $row = $statement->fetch();
+    $statement->closeCursor();
+
+    return $row;
+}
+
+function update_tokens(): void
+{
+    global $db;
+    $query = 'update users set tokens = :tokens where id = :id';
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':tokens', $_SESSION['tokens']);
+    $statement->bindvalue(':id', $_SESSION['user_id']);
+    $statement->execute();
+    $statement->closeCursor();
 }

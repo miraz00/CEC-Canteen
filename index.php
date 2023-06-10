@@ -5,8 +5,18 @@ date_default_timezone_set("Asia/Kolkata");
 
 require_once('model/canteen_db.php');
 require_once('model/users.php');
+require_once('model/items.php');
+require_once('model/orders.php');
 
 require_once('includes/helpers.php');
+
+$temp = 0;
+if(isset($_REQUEST['action']))
+    if(str_contains($_REQUEST['action'], 'cat'))
+    {
+        $temp = $_REQUEST['action'];
+        $_REQUEST['action'] = 'order_page';
+    }
 
 switch(@$_REQUEST['action'])
 {
@@ -101,18 +111,86 @@ switch(@$_REQUEST['action'])
             if (!empty($_POST['username']) && !empty($_POST['password']))
                 if (check($_POST['username'], $_POST['password']))
                 {
+                    $user = user_details($_POST['username']);
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['name'] = $user['name'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['username'] = $user['username'];
+                    if(isset($user['tokens']))
+                    {
+                        $_SESSION['account'] = 'student';
+                        $_SESSION['tokens'] = $user['tokens'];
+                    }
+                    else
+                        $_SESSION['account'] = 'teacher';
                     redirect_home();
                     return;
                 }
                 else
+                {
+                    $_REQUEST['action'] = "login_page";
                     redirect_login("Incorrect Username and/or Password!");
+                }
             else
+            {
+                $_REQUEST['action'] = "login_page";
                 redirect_login("Username and/or Password can't be empty!");
+            }
         break;
 
     case "logout":
         session_unset();
         redirect_home();
+        break;
+
+    case "order_page":
+        if (!isset($_SESSION['user_id']))
+        {
+            $_REQUEST['action'] = 'login_page';
+            redirect_login("You need to login first!");
+            return;
+        }
+        $_REQUEST['action'] = $temp;
+        $breakfast_items = select_items('breakfast');
+        $rice_dishes_items = select_items('rice dishes');
+        $curries_items = select_items('curries');
+        $snacks_items = select_items('snacks');
+        $beverages_items = select_items('beverages');
+        $desserts_items = select_items('desserts');
+        render("templates/header", ["title" => "Order Your Food"]);
+        render("order");
+        render("templates/footer");
+        break;
+
+    case "place_order":
+        if($_SESSION['account'] == 'student')
+        {
+            if ($_POST['total'] > $_SESSION['tokens'])
+            {
+                $_REQUEST['action'] = 'cat_' . $_REQUEST['category'];
+                $breakfast_items = select_items('breakfast');
+                $rice_dishes_items = select_items('rice dishes');
+                $curries_items = select_items('curries');
+                $snacks_items = select_items('snacks');
+                $beverages_items = select_items('beverages');
+                $desserts_items = select_items('desserts');
+                render("templates/header", ["title" => "Order Your Food"]);
+                render("order", ["error_message" => "Token balance insufficient, please recharge your tokens by contacting the canteen administrator."]);
+                render("templates/footer");
+                return;
+            }
+            else
+            {
+                $_SESSION['tokens'] -= $_POST['total'];
+                $jsonString = $_POST['cart'];
+                $cart = json_decode($jsonString, true);
+                update_tokens();
+                update_orders($cart);
+                $orders = get_orders();
+                redirect_order_history();
+                return;
+            }
+        }
         break;
 
     default:

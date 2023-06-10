@@ -67,7 +67,10 @@
             </div>
             <div class="img-footer">
                 <div class="footer-btn">
-                    <button type="button" class="food-btn">Order Now</button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="action" value="cat_breakfast">
+                        <button type="submit" class="food-btn">Order Now</button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -78,7 +81,10 @@
             </div>
             <div class="img-footer">
                 <div class="footer-btn">
-                    <button type="button" class="food-btn">Order Now</button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="action" value="cat_rice_dishes">
+                        <button type="submit" class="food-btn">Order Now</button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -89,7 +95,10 @@
             </div>
             <div class="img-footer">
                 <div class="footer-btn">
-                    <button type="button" class="food-btn">Order Now</button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="action" value="cat_curries">
+                        <button type="submit" class="food-btn">Order Now</button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -100,7 +109,10 @@
             </div>
             <div class="img-footer">
                 <div class="footer-btn">
-                    <button type="button" class="food-btn">Order Now</button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="action" value="cat_snacks">
+                        <button type="submit" class="food-btn">Order Now</button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -111,7 +123,10 @@
             </div>
             <div class="img-footer">
                 <div class="footer-btn">
-                    <button type="button" class="food-btn">Order Now</button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="action" value="cat_beverages">
+                        <button type="submit" class="food-btn">Order Now</button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -122,7 +137,10 @@
             </div>
             <div class="img-footer">
                 <div class="footer-btn">
-                    <button type="button" class="food-btn">Order Now</button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <input type="hidden" name="action" value="cat_desserts">
+                        <button type="submit" class="food-btn">Order Now</button>
+                    </form>
                 </div>
             </div>
         </article>
