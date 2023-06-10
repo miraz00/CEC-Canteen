@@ -11,27 +11,27 @@
         <div class="navbar navbar-expand" id="navbarCollapse">
             <ul class="navbar-nav ms-auto ">
 
-                    <a class="btn btn-dark w-75 me-4 rounded-pill" href="<?= $_SERVER['PHP_SELF'] ?> ">Home</a>
+                    <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;justify-content: center" href="<?= $_SERVER['PHP_SELF'] ?> ">Home</a>
 
 
-                    <a href="#food_menu" class="btn btn-dark w-75 me-4 rounded-pill">Menu</a>
+                    <a href="#food_menu" class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;justify-content: center">Menu</a>
 
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="register" style="display: flex">
                         <input type="hidden" name="action" value="register_page">
-                        <a class="btn btn-dark w-75 me-4 rounded-pill" href="javascript:$('#register').submit(); ">SignUp</a>
+                        <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;" href="javascript:$('#register').submit(); ">SignUp</a>
                     </form>
 
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="login" style="display: flex">
                         <input type="hidden" name="action" value="login_page">
-                        <a class="btn btn-dark w-75 me-4 rounded-pill" href="javascript:$('#login').submit(); " >LogIn</a>
+                        <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;" href="javascript:$('#login').submit(); " >LogIn</a>
                     </form>
                 <?php else: ?>
                     <span class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;"><i class="fas fa-user-circle" style="font-size:25px"></i>&nbsp;Profile</span>
 
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="logout" style="display: flex">
                         <input type="hidden" name="action" value="logout">
-                        <a class="btn btn-dark w-75 me-4 rounded-pill" href="javascript:$('#logout').submit(); ">LogOut</a>
+                        <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;" href="javascript:$('#logout').submit(); ">LogOut</a>
                     </form>
                     <?php if(isset($_SESSION['tokens'])): ?>
                         <button type="button" class="btn btn-primary">

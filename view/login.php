@@ -19,7 +19,9 @@
                 <div style="margin-top: 5.5rem;">
                     <?php if(isset($message)) :
                         if ($message=="Registered Successfully!") : ?>
-                            <span style="color:Green;display: flex;justify-content: center;" class="msg"><?= $message ?></span>
+                            <div class="alert alert-success" role="alert">
+                                <?= $message ?>
+                            </div>
                         <?php endif ?>
                     <?php endif ?>
                     <fieldset>
@@ -35,7 +37,9 @@
                         </div>
                     </fieldset>
                     <?php if(isset($message) && $message!="Registered Successfully!") :?>
-                        <span style="color:red;display: flex;justify-content: center;" class="msg"><?= $message ?></span>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $message ?>
+                        </div>
                     <?php endif ?>
                 </div>
                 <input type="hidden" name="action" value="login"/>
