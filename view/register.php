@@ -12,6 +12,16 @@
                 <p id="intro-login">Welcome back to<br/><strong>CEC Canteen</strong>!</p>
             </div>
         </aside>
+        <style>
+.vl {
+  border-left: 1px solid white;
+  height: 500px;
+  margin-right:150px;
+  margin-left:110px
+}
+</style>
+
+<div class="vl"></div>
         <section>
             <h1>
                 Sign Up

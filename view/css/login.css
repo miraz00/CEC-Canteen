@@ -9,15 +9,19 @@ body, html {
     height: 100%;
 }
 body {
-    background: white;
+    background: #020238eb;
     margin: 0;
     font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     color: #857567;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
 }
+@media screen and (max-width: 500px) {
+.vl
+{display:none ;}
+}
 main {
-    background: white;
+    
     height: 100%;
 }
 main aside {
@@ -29,7 +33,7 @@ main aside {
     justify-content: center;
     height: calc(100% / 3);
     padding: 12px;
-    background: #504f4c url('https://images.unsplash.com/photo-1443131307017-4097c8ac7763?dpr=2&auto=format&fit=crop&w=1500&h=1909&q=80&cs=tinysrgb') no-repeat center center / cover;
+   
 }
 main aside div:empty {
     opacity: 0.5;
@@ -38,8 +42,7 @@ main aside div:empty {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #FEA116 url('https://images.unsplash.com/photo-1443131307017-4097c8ac7763?dpr=2&auto=format&fit=crop&w=1500&h=1909&q=80&cs=tinysrgb') no-repeat center center / cover;
-    background-blend-mode: screen;
+    
 }
 main aside svg {
     position: relative;
@@ -153,9 +156,10 @@ main section form fieldset div input {
     margin: 0;
     padding: 6px 9px;
     width: 100%;
-    color: #857567;
+    color: #080808;
     font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
+    font-weight: 500;
 }
 main section form fieldset div input::placeholder {
     color: rgba(133, 117, 103, .4);
@@ -209,7 +213,7 @@ main section form input[type="submit"] {
     border-radius: 0;
     font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 24px;
-    
+    font-weight: 900;
     line-height: 2;
     background: #FEA116;
     color: white;
@@ -217,9 +221,11 @@ main section form input[type="submit"] {
 }
 main section form input[type="submit"]:hover, main section form input[type="submit"]:focus {
     background: #976a36;
+    font-weight: 900;
 }
 main section form input[type="submit"]:active {
     background: #857567;
+    font-weight: 900;
 }
 main section form.active {
     opacity: 1;
@@ -254,6 +260,7 @@ main.with-hover section form {
 }
 main.with-hover section form fieldset, main.with-hover section form li, main.with-hover section form input[type="submit"] {
     transition: all 500ms ease-out;
+    font-weight: 900;
 }
 main.with-hover section form button, main.with-hover section form input {
     transition: all 150ms ease-out;
@@ -278,6 +285,7 @@ main.with-hover section form.active#form-signup li:nth-child(2) {
 }
 main.with-hover section form.active#form-signup input[type="submit"] {
     transition-delay: 250ms;
+    font-weight: 900;
 }
 main.with-hover section form.active#form-login fieldset:nth-child(2) {
     transition-delay: 50ms;
@@ -290,6 +298,7 @@ main.with-hover section form.active#form-login li:nth-child(2) {
 }
 main.with-hover section form.active#form-login input[type="submit"] {
     transition-delay: 200ms;
+    font-weight: 900;
 }
 main.with-hover section form:not(.active)#form-signup fieldset:nth-child(1) {
     transition-delay: 250ms;
@@ -412,7 +421,7 @@ main.on-enter section form input[type="submit"] {
         align-items: center;
         align-content: center;
         justify-content: center;
-        background: #18151582;
+        background: #020238eb;
    }
     main {
         display: flex;
@@ -420,7 +429,7 @@ main.on-enter section form input[type="submit"] {
         overflow: hidden;
         height: 100%;
         max-height: 490px;
-        box-shadow: 0 0 10px rgba(56, 54, 53, 0.5);
+        
    }
 
     .log {
