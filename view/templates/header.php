@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -31,13 +32,12 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="view/css/bootstrap.min.css" rel="stylesheet">
     <link href="view/css/main.css" rel="stylesheet">
+    <?php if($_SERVER['PHP_SELF'] == '/CEC-Canteen/view/history.php') ?>
+        <link href="css/history.css" rel="stylesheet">
     <?php if (isset($_REQUEST['action'])) : ?>
         <?php if ($_REQUEST['action'] == 'login_page' || $_REQUEST['action'] == 'register_page' || $_REQUEST['action'] == 'register' || $_REQUEST['action'] == 'code_submit'): ?>
             <link href="view/css/login.css" rel="stylesheet">
             <script src="view/js/login.js" defer></script>
-        <?php endif ?>
-        <?php if ($_REQUEST['action'] == 'place_order'): ?>
-            <link href="view/css/history.css" rel="stylesheet">
         <?php endif ?>
         <?php if (str_contains($_REQUEST['action'], 'cat')): ?>
             <script src="view/js/order.js" defer></script>
@@ -50,7 +50,8 @@
         <?php endif ?>
     <?php endif?>
 
-
+    <?php if(isset($_SESSION['script'])) ?>
+        <?php echo $_SESSION['script'];$_SESSION['script'] = Null; ?>
 
     <title><?php if(isset($title)) echo htmlspecialchars($title)?></title>
 </head>

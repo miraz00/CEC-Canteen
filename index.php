@@ -3,10 +3,13 @@ session_start();
 
 date_default_timezone_set("Asia/Kolkata");
 
+header('Content-Type: text/html; charset=utf-8');
+
 require_once('model/canteen_db.php');
 require_once('model/users.php');
 require_once('model/items.php');
 require_once('model/orders.php');
+require_once('model/bills.php');
 
 require_once('includes/helpers.php');
 
@@ -17,6 +20,11 @@ if(isset($_REQUEST['action']))
         $temp = $_REQUEST['action'];
         $_REQUEST['action'] = 'order_page';
     }
+
+
+if (isset($_SESSION['tokens']))
+    $_SESSION['tokens'] = get_tokens($_SESSION['user_id']);
+
 
 switch(@$_REQUEST['action'])
 {
@@ -163,10 +171,8 @@ switch(@$_REQUEST['action'])
         break;
 
     case "place_order":
-        if($_SESSION['account'] == 'student')
+        if($_SESSION['account'] == 'student' && $_POST['total'] > $_SESSION['tokens'])
         {
-            if ($_POST['total'] > $_SESSION['tokens'])
-            {
                 $_REQUEST['action'] = 'cat_' . $_REQUEST['category'];
                 $breakfast_items = select_items('breakfast');
                 $rice_dishes_items = select_items('rice dishes');
@@ -178,19 +184,27 @@ switch(@$_REQUEST['action'])
                 render("order", ["error_message" => "Token balance insufficient, please recharge your tokens by contacting the canteen administrator."]);
                 render("templates/footer");
                 return;
-            }
-            else
-            {
-                $_SESSION['tokens'] -= $_POST['total'];
-                $jsonString = $_POST['cart'];
-                $cart = json_decode($jsonString, true);
-                update_tokens();
-                update_orders($cart);
-                $orders = get_orders();
-                redirect_order_history();
-                return;
-            }
         }
+
+        $_SESSION['script'] = "<script>sessionStorage.removeItem('shoppingCart');</script>";
+        $jsonString = $_POST['cart'];
+        $cart = json_decode($jsonString, true);
+        utf_nbsp_to_sp($cart);
+        $_SESSION['total'] = $_POST['total'];
+        update_orders($cart);
+        if($_SESSION['account'] == 'student')
+        {
+            $_SESSION['tokens'] -= $_POST['total'];
+            update_tokens();
+        }
+        header("Location: view/history.php");
+
+        break;
+
+    case 'bills':
+        render("templates/header", ["title" => "Bills"]);
+        render("bills");
+        render("templates/footer");
         break;
 
     default:

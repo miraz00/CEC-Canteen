@@ -102,3 +102,10 @@ function redirect_order_history(): void
     render("history");
     render("templates/footer");
 }
+
+function utf_nbsp_to_sp(&$cart): void
+{
+    foreach ($cart as &$item)
+        $item['name'] = str_replace("\xC2\xA0", ' ', $item['name']);
+    unset($item);
+}

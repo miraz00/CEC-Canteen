@@ -211,8 +211,7 @@ document.getElementById('order-now-btn').addEventListener('click', function() {
     document.getElementById('total-input').value = document.querySelector('.total-cart').textContent;
     document.querySelector('.cat_special').value = document.querySelector('.nav-link.active').id.split('-')[0];
 
-    var jsonData = sessionStorage.getItem('shoppingCart');
-    var jsonString = JSON.stringify(jsonData);
+    var jsonString = sessionStorage.getItem('shoppingCart');
     var cartInput = document.getElementById('cartInput');
     cartInput.value = jsonString;
 });

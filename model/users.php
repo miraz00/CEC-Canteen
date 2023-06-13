@@ -114,3 +114,16 @@ function update_tokens(): void
     $statement->execute();
     $statement->closeCursor();
 }
+
+function get_tokens($id): float
+{
+    global $db;
+    $query = 'select tokens from users where id = :id';
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':id', $id);
+    $statement->execute();
+    $row = $statement->fetch();
+    $statement->closeCursor();
+
+    return $row['tokens'];
+}
