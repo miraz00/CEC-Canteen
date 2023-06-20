@@ -13,8 +13,7 @@
 
                     <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;justify-content: center" href="<?= $_SERVER['PHP_SELF'] ?> ">Home</a>
 
-
-                    <a href="#food_menu" class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;justify-content: center">Menu</a>
+                    <a href="view/history.php" class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;justify-content: center">Orders</a>
 
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="register" style="display: flex">
@@ -37,6 +36,11 @@
                         <button type="button" class="btn btn-primary">
                             Tokens <span class="badge badge-light" style="background-color: brown;"><?= $_SESSION['tokens'] ?></span>
                         </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php else: ?>
+                        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="bills" style="display: flex">
+                            <input type="hidden" name="action" value="bills">
+                            <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;" href="javascript:$('#bills').submit(); ">Bills</a>
+                        </form>
                     <?php endif ?>
                 <?php endif ?>
             </ul>

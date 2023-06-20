@@ -1,4 +1,12 @@
+html {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
 
+body {
+    padding: 1rem;
+}
 .bs4-order-tracking {
     margin-bottom: 30px;
     overflow: hidden;
@@ -61,8 +69,7 @@
 }
 
 .bs4-order-tracking li:last-child:after {
-    left: 0%!important;
-    width: 0% !important
+    right: 50%;
 }
 .bs4-order-tracking li.active{
     font-weight: bold;
@@ -79,4 +86,32 @@
 .card-timeline {
     background-color: #fff;
     z-index: 0
+}
+
+.order_head {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+#pills-tabContent .bs4-order-tracking li:last-child.active:after {
+    background: #dc3545;
+    width: 50%; /* Change the width to 50% */
+    left: 50%; /* Set the left property to 50% for the last child when it's active */
+}
+
+#pills-tabContent .bs4-order-tracking li:last-child:after {
+    width: 50%;
+}
+
+#pills-profile .bs4-order-tracking li:last-child:after {
+    left: 0 !important;
+    width: 0 !important
+}
+
+.order{
+    margin-top: 2rem;
+}
+
+.tab-pane .card {
+    padding-bottom: 1rem;
 }
