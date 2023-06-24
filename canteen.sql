@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2023 at 04:27 AM
+-- Generation Time: Jun 24, 2023 at 09:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -108,23 +108,27 @@ CREATE TABLE `order_history` (
 
 INSERT INTO `order_history` (`id`, `user_id`, `ordered_on`, `preparing`, `prepared`, `delivered`) VALUES
 (3, 9, '2023-06-11 02:14:56', 1, 1, 1),
-(4, 9, '2023-06-11 02:21:49', 1, 1, 0),
-(5, 9, '2023-06-11 02:29:53', 1, 0, 0),
-(10, 9, '2023-06-11 02:45:04', 0, 0, 0),
-(49, 9, '2023-06-11 09:27:50', 0, 0, 0),
-(50, 9, '2023-06-11 09:28:20', 0, 0, 0),
-(51, 9, '2023-06-11 09:34:51', 0, 0, 0),
-(52, 9, '2023-06-11 09:35:55', 0, 0, 0),
-(53, 9, '2023-06-12 06:20:38', 0, 0, 0),
-(54, 9, '2023-06-12 06:23:11', 1, 0, 1),
-(55, 9, '2023-06-12 13:57:12', 0, 0, 0),
-(56, 9, '2023-06-12 13:59:42', 0, 0, 0),
-(57, 9, '2023-06-12 14:59:33', 0, 0, 0),
-(58, 9, '2023-06-12 18:01:57', 0, 0, 0),
-(59, 9, '2023-06-12 18:03:03', 0, 0, 0),
+(4, 9, '2023-06-11 02:21:49', 1, 1, 1),
+(5, 9, '2023-06-11 02:29:53', 1, 1, 1),
+(10, 9, '2023-06-11 02:45:04', 1, 1, 1),
+(49, 9, '2023-06-11 09:27:50', 1, 1, 1),
+(50, 9, '2023-06-11 09:28:20', 1, 1, 1),
+(51, 9, '2023-06-11 09:34:51', 1, 1, 1),
+(52, 9, '2023-06-11 09:35:55', 1, 1, 1),
+(53, 9, '2023-06-12 06:20:38', 1, 1, 1),
+(54, 9, '2023-06-12 06:23:11', 1, 1, 1),
+(55, 9, '2023-06-12 13:57:12', 1, 1, 1),
+(56, 9, '2023-06-12 13:59:42', 1, 1, 1),
+(57, 9, '2023-06-12 14:59:33', 1, 1, 1),
+(58, 9, '2023-06-12 18:01:57', 1, 1, 1),
+(59, 9, '2023-06-12 18:03:03', 1, 1, 1),
 (60, 9, '2023-04-21 02:16:46', 1, 1, 1),
 (61, 9, '2023-04-29 02:17:29', 1, 1, 1),
-(62, 9, '2023-05-17 15:24:01', 1, 1, 1);
+(62, 9, '2023-05-17 15:24:01', 1, 1, 1),
+(63, 10, '2023-06-13 14:16:09', 1, 1, 1),
+(64, 9, '2023-06-13 14:18:22', 1, 1, 1),
+(65, 10, '2023-06-24 01:03:25', 1, 1, 0),
+(66, 9, '2023-06-24 01:10:55', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -174,7 +178,12 @@ INSERT INTO `order_items` (`id`, `item_id`, `item_name`, `item_price`, `item_qua
 (61, 16, 'Chicken Curry', 90.00, 5),
 (61, 22, 'Tea', 10.00, 10),
 (62, 17, 'Beef Curry', 70.00, 7),
-(62, 23, 'Coffee', 12.00, 10);
+(62, 23, 'Coffee', 12.00, 10),
+(63, 29, 'Pastry', 50.00, 2),
+(63, 21, 'Chicken Burger', 40.00, 1),
+(64, 14, 'Chicken Biriyani', 90.00, 2),
+(65, 17, 'Beef Curry', 70.00, 1),
+(66, 23, 'Coffee', 12.00, 2);
 
 -- --------------------------------------------------------
 
@@ -196,7 +205,7 @@ CREATE TABLE `teacher_bills` (
 --
 
 INSERT INTO `teacher_bills` (`bill_id`, `teacher_id`, `month`, `year`, `billed_amt`, `paid`) VALUES
-(1, 9, 6, 23, 1138.00, 0),
+(1, 9, 6, 23, 1342.00, 0),
 (6, 9, 5, 23, 2912.00, 0),
 (7, 9, 4, 23, 1539.00, 1);
 
@@ -221,7 +230,9 @@ INSERT INTO `teacher_records` (`teacher_id`, `order_id`, `paid`) VALUES
 (9, 56, 0),
 (9, 57, 0),
 (9, 58, 0),
-(9, 59, 0);
+(9, 59, 0),
+(9, 64, 0),
+(9, 66, 0);
 
 -- --------------------------------------------------------
 
@@ -243,8 +254,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `name`, `tokens`) VALUES
-(6, 'chn20cs071@ceconline.edu', 'Mohammed Faris', '$2y$10$Ve37Nk5C3DlObfROFlrWDecxcvv7MycRb64Uhpc85DXSERWPGowsq', 'Faris ', 0.00),
-(9, 'chn20cs070@ceconline.edu', 'miraz', '$2y$10$SRmMb3I3oj/ySXBkejuv/ezWNiGxj4aCzEt2YWyAs2HJd2fd1wGKy', 'Miraz J Naina', NULL);
+(9, 'chn20cs070@ceconline.edu', 'miraz', '$2y$10$SRmMb3I3oj/ySXBkejuv/ezWNiGxj4aCzEt2YWyAs2HJd2fd1wGKy', 'Miraz J Naina', NULL),
+(10, 'chn20cs071@ceconline.edu', 'faris', '$2y$10$QVzmJo/DLUIh.eV.Z32WHecHYAcbBDmd.ZDDNqZUJiViOYKD8X3x6', 'Mohamed Faris', 9790.00);
 
 --
 -- Indexes for dumped tables
@@ -315,19 +326,19 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `order_history`
 --
 ALTER TABLE `order_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `teacher_bills`
 --
 ALTER TABLE `teacher_bills`
-  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

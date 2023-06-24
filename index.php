@@ -118,6 +118,7 @@ switch(@$_REQUEST['action'])
         if (isset($_POST['username']) && isset($_POST['password']))
             if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin')
             {
+                $_SESSION['account'] = 'admin';
                 header("Location: view/admin/main/template/admin.php");
                 return;
             }
@@ -210,6 +211,45 @@ switch(@$_REQUEST['action'])
         render("templates/header", ["title" => "Bills"]);
         render("bills");
         render("templates/footer");
+        break;
+
+    case 'order_status':
+        if(isset($_POST['preparing']))
+        {
+            if($_POST['preparing'] == 0)
+                update_order_status("preparing", 1, $_POST['order_id']);
+            else
+            {
+                update_order_status("preparing", 0, $_POST['order_id']);
+                update_order_status("prepared", 0, $_POST['order_id']);
+                update_order_status("delivered", 0, $_POST['order_id']);
+            }
+        }
+        if(isset($_POST['prepared']))
+        {
+            if($_POST['prepared'] == 0)
+            {
+                update_order_status("prepared", 1, $_POST['order_id']);
+                update_order_status("preparing", 1, $_POST['order_id']);
+            }
+            else
+            {
+                update_order_status("prepared", 0, $_POST['order_id']);
+                update_order_status("delivered", 0, $_POST['order_id']);
+            }
+        }
+        if(isset($_POST['delivered']))
+        {
+            if($_POST['delivered'] == 0)
+            {
+                update_order_status("delivered", 1, $_POST['order_id']);
+                update_order_status("prepared", 1, $_POST['order_id']);
+                update_order_status("preparing", 1, $_POST['order_id']);
+            }
+            else
+                update_order_status("delivered", 0, $_POST['order_id']);
+        }
+        header("Location: view/admin/main/template/orders.php");
         break;
 
     default:

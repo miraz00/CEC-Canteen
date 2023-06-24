@@ -1,3 +1,22 @@
+<?php
+session_start();
+if($_SESSION['account'] != 'admin')
+    {
+        echo "You are not authorized to visit this page!";
+        return;
+    }
+date_default_timezone_set("Asia/Kolkata");
+
+header('Content-Type: text/html; charset=utf-8');
+
+require_once('../../../../model/canteen_db.php');
+require_once('../../../../model/users.php');
+require_once('../../../../model/items.php');
+require_once('../../../../model/orders.php');
+require_once('../../../../model/bills.php');
+
+require_once('../../../../includes/helpers.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +92,10 @@
                 <div class="col-sm-6 p-md-0">
                     <div class="breadcrumb-range-picker">
                         <span><i class="icon-calender"></i></span>
-                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>
+                        <form action="../../../../index.php" method="post" id="logout" style="display: flex;">
+                            <input type="hidden" name="action" value="logout">
+                            <a class="btn badge-primary" style="display: flex;align-items: flex-end;white-space: nowrap;" href="javascript:$('#logout').submit(); ">LogOut</a>
+                        </form>
                     </div>
                 </div>
                
@@ -83,7 +105,7 @@
                 <div class="row justify-content-between mb-4">
 					<div class="col-xl-3 col-lg-4">
 						<h2 class="page-heading">Hi,Welcome Back!</h2>
-						<p class="mb-0">Your restaurent admin template</p>
+						<p class="mb-0">Your restaurant admin template</p>
                     </div>
                     <div class="col-xl-9 col-xxl-9 col-lg-8 mt-4 mt-lg-0">
                         <div class="steps">
