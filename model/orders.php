@@ -123,7 +123,8 @@ function orders_summary($month, $year) : array
         order_items oi ON oh.id = oi.id
     WHERE 
         MONTH(oh.ordered_on) = :month AND
-        RIGHT(YEAR(oh.ordered_on), 2) = :year
+        RIGHT(YEAR(oh.ordered_on), 2) = :year AND
+        oh.user_id = :user_id
     GROUP BY 
         oh.id, oh.ordered_on
     ORDER BY 
@@ -132,8 +133,87 @@ function orders_summary($month, $year) : array
     $statement = $db->prepare($query);
     $statement->bindvalue(':month', $month);
     $statement->bindvalue(':year', $year);
+    $statement->bindvalue(':user_id', $_SESSION['user_id']);
     $statement->execute();
     $orders_summary = $statement->fetchAll();
     $statement->closeCursor();
     return $orders_summary;
+}
+
+function all_orders(): array
+{
+    global $db;
+    $query = 'SELECT order_history.id as order_id, name, tokens, ordered_on, preparing, prepared, delivered FROM order_history, users WHERE user_id = users.id order by ordered_on desc ;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $orders = $statement->fetchAll();
+    $statement->closeCursor();
+    return $orders;
+}
+
+function order_summary($order_id): array
+{
+    global $db;
+    $query = 'select * from order_items where id = :order_id';
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':order_id', $order_id);
+    $statement->execute();
+    $orders = $statement->fetchAll();
+    $statement->closeCursor();
+    return $orders;
+}
+
+function order_price($order_id): array
+{
+    global $db;
+    $query = 'SELECT sum(item_price * item_quantity) as total FROM order_items WHERE id = :order_id;';
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':order_id', $order_id);
+    $statement->execute();
+    $price = $statement->fetchAll();
+    $statement->closeCursor();
+    return $price[0];
+}
+
+function update_order_status($status, $status_value, $order_id): void
+{
+    global $db;
+    if($status == "preparing")
+    {
+        if ($status_value === 1)
+        {
+            $query = 'update order_history set preparing = 1  WHERE id = :order_id;';
+        }
+        else
+        {
+            $query = 'update order_history set preparing = 0  WHERE id = :order_id;';
+        }
+    }
+    elseif($status == "prepared")
+    {
+        if ($status_value === 1)
+        {
+            $query = 'update order_history set prepared = 1  WHERE id = :order_id;';
+        }
+        else
+        {
+            $query = 'update order_history set prepared = 0  WHERE id = :order_id;';
+        }
+
+    }
+    else
+    {
+        if ($status_value === 1)
+        {
+            $query = 'update order_history set delivered = 1  WHERE id = :order_id;';
+        }
+        else
+        {
+            $query = 'update order_history set delivered = 0  WHERE id = :order_id;';
+        }
+    }
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':order_id', $order_id);
+    $statement->execute();
+    $statement->closeCursor();
 }

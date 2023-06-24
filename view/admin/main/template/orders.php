@@ -1,4 +1,22 @@
+<?php
+session_start();
+if($_SESSION['account'] != 'admin')
+{
+    echo "You are not authorized to visit this page!";
+    return;
+}
+date_default_timezone_set("Asia/Kolkata");
 
+header('Content-Type: text/html; charset=utf-8');
+
+require_once('../../../../model/canteen_db.php');
+require_once('../../../../model/users.php');
+require_once('../../../../model/items.php');
+require_once('../../../../model/orders.php');
+require_once('../../../../model/bills.php');
+
+require_once('../../../../includes/helpers.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +32,6 @@
     <!-- Custom Stylesheet -->
     <link href="../../assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -97,157 +114,105 @@
                                 <div class="table-responsive">
                                     <table id="example" class="display table-responsive-xl" style="min-width: 845px">
                                         <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Order Name</th>
-                                                    <th scope="col">Custommer Name</th>
-                                                    <th scope="col">Location</th>
-                                                    <th scope="col">Delivery time</th>
-                                                    <th scope="col">Quantity</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
+                                            <tr>
+                                                <th scope="col" id="order_head">Order ID</th>
+                                                <th scope="col">Customer Name</th>
+                                                <th scope="col">Account Type</th>
+                                                <th scope="col">Ordered On</th>
+                                                <th scope="col">Items</th>
+                                                <th scope="col">Action</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>54565</td>
-                                                <td>Fresh Crostini</td>
-                                                <td>Adam Smith</td>
-                                                <td>Gulshan</td>
-                                                <td>10:20</td>
-                                                <td>5</td>
-                                                <td>$34</td>
-                                                <td><span class="badge badge-xs badge-primary">Pending</span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a>
-                                                        <a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54565</td>
-                                                <td>Multigrain Hot Cereal</td>
-                                                <td>John Doe</td>
-                                                <td>Baridhara</td>
-                                                <td>3:00</td>
-                                                <td>4</td>
-                                                <td>$ 87</td>
-                                                <td><span class="badge badge-xs badge-success">Delivered</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54235</td>
-                                                <td>French Fry</td>
-                                                <td>Maximillian</td>
-                                                <td>Khilgaon</td>
-                                                <td>2:00</td>
-                                                <td>6</td>
-                                                <td>$ 65</td>
-                                                <td><span class="badge badge-xs badge-dark">Cencelled</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54587</td>
-                                                <td>Fried Egg Sandwich</td>
-                                                <td>John Johnson</td>
-                                                <td>Gulshan</td>
-                                                <td>11:00</td>
-                                                <td>3</td>
-                                                <td>$ 56</td>
-                                                <td><span class="badge badge-xs badge-primary">Pending</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54521</td>
-                                                <td>Pizza</td>
-                                                <td>Mike Hussy</td>
-                                                <td>Banani</td>
-                                                <td>12:00</td>
-                                                <td>5</td>
-                                                <td>$ 65</td>
-                                                <td><span class="badge badge-xs badge-warning">Pending</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2345</td>
-                                                <td>Fresh Crostini</td>
-                                                <td>Adam Smith</td>
-                                                <td>Gulshan</td>
-                                                <td>10:20</td>
-                                                <td>5</td>
-                                                <td>$34</td>
-                                                <td><span class="badge badge-xs badge-primary">Pending</span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a>
-                                                        <a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2345</td>
-                                                <td>Multigrain Hot Cereal</td>
-                                                <td>John Doe</td>
-                                                <td>Baridhara</td>
-                                                <td>3:00</td>
-                                                <td>4</td>
-                                                <td>$ 87</td>
-                                                <td><span class="badge badge-xs badge-success">Delivered</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2345</td>
-                                                <td>French Fry</td>
-                                                <td>Maximillian</td>
-                                                <td>Khilgaon</td>
-                                                <td>2:00</td>
-                                                <td>6</td>
-                                                <td>$ 65</td>
-                                                <td><span class="badge badge-xs badge-dark">Cencelled</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1231</td>
-                                                <td>Fried Egg Sandwich</td>
-                                                <td>John Johnson</td>
-                                                <td>Gulshan</td>
-                                                <td>11:00</td>
-                                                <td>3</td>
-                                                <td>$ 56</td>
-                                                <td><span class="badge badge-xs badge-primary">Pending</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6755</td>
-                                                <td>Pizza</td>
-                                                <td>Mike Hussy</td>
-                                                <td>Banani</td>
-                                                <td>12:00</td>
-                                                <td>5</td>
-                                                <td>$ 65</td>
-                                                <td><span class="badge badge-xs badge-warning">Pending</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
+                                            <?php $orders = all_orders();
+                                            foreach ($orders as $order):?>
+                                                <tr>
+                                                    <td>
+                                                        <?= $order['order_id'] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $order['name'] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if(isset($order['tokens']))
+                                                                echo "Student";
+                                                            else
+                                                                echo "Teacher";
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $order['ordered_on'] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $items = order_summary($order['order_id']);
+                                                        $lastKey = array_key_last($items); // Get the last key of the array
+                                                        foreach ($items as $key => $item): ?>
+                                                            <?= $item['item_name'] ?>( &#8377;<?= $item['item_price']?> ) X <?= $item['item_quantity'] ?>
+                                                            <?= "<br>" ?>
+                                                            <?php if($key == $lastKey): // Check if the current key is the last key ?>
+                                                                <?= "<hr>" ?>
+                                                                Total: &#8377;<?= order_price($order['order_id'])['total'] ?>
+                                                            <?php endif ?>
+                                                        <?php endforeach; ?>
+
+                                                    </td>
+                                                    <td>
+                                                        <form action="../../../../index.php" method="post" class="order-form">
+                                                            <div class="form-group">
+                                                                <div class="form-check form-check-inline">
+                                                                    <label class="form-check-label">
+                                                                        <input name="preparing" type="checkbox" id="checkbox<?php echo $order['order_id']; ?>preparing" class="form-check-input" value="<?php if($order['preparing']) echo '1'; else echo '0'; ?>" <?php if($order['preparing']) echo 'checked';?> onclick="submitForm(this)" >Preparing
+                                                                    </label>
+                                                                    <?php if($order['preparing']):?>
+                                                                        <input name="preparing" type="hidden" value="1">
+                                                                    <?php endif ?>
+                                                                    <input name="action" type="hidden" value="order_status">
+                                                                    <input name="order_id" type="hidden" value="<?= $order['order_id'] ?>">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <form action="../../../../index.php" method="post" class="order-form">
+                                                            <div class="form-group">
+                                                                <div class="form-check form-check-inline">
+                                                                    <label class="form-check-label">
+                                                                        <input name="prepared" type="checkbox" id="checkbox<?php echo $order['order_id']; ?>prepared" class="form-check-input" value="<?php if($order['prepared']) echo '1'; else echo '0'; ?>" <?php if($order['prepared']) echo 'checked';?> onclick="submitForm(this)" >Prepared
+                                                                    </label>
+                                                                    <?php if($order['prepared']):?>
+                                                                        <input name="prepared" type="hidden" value="1">
+                                                                    <?php endif ?>
+                                                                    <input name="action" type="hidden" value="order_status">
+                                                                    <input name="order_id" type="hidden" value="<?= $order['order_id'] ?>">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <form action="../../../../index.php" method="post" class="order-form">
+                                                            <div class="form-group">
+                                                                <div class="form-check form-check-inline">
+                                                                    <label class="form-check-label">
+                                                                        <input name="delivered" type="checkbox" id="checkbox<?php echo $order['order_id']; ?>delivered" class="form-check-input" value="<?php if($order['delivered']) echo '1'; else echo '0'; ?>" <?php if($order['delivered']) echo 'checked';?> onclick="submitForm(this)" >Delivered
+                                                                    </label>
+                                                                    <?php if($order['delivered']):?>
+                                                                        <input name="delivered" type="hidden" value="1">
+                                                                    <?php endif ?>
+                                                                    <input name="action" type="hidden" value="order_status">
+                                                                    <input name="order_id" type="hidden" value="<?= $order['order_id'] ?>">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($order['delivered']): ?>
+                                                            <span class="badge badge-xs badge-success">Delivered</span>
+                                                        <?php elseif($order['prepared']): ?>
+                                                            <span class="badge badge-xs badge-primary">Prepared</span>
+                                                        <?php else: ?>
+                                                            <span class="badge badge-xs badge-warning">Preparing</span>
+                                                        <?php endif ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -478,10 +443,6 @@
         <!--**********************************
             Right sidebar end
         ***********************************-->
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 
     <!--**********************************
         Scripts
@@ -498,8 +459,22 @@
 
     <!-- Init files -->
     <script src="../js/plugins-init/datatables.init.js"></script>
-    
 
+    <script>
+        function submitForm(checkbox) {
+            var form = checkbox.closest('.order-form');
+            form.submit();
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate a click on the "Order ID" table header
+            var orderIDHeader = document.querySelector('#order_head');
+            var clickEvent = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true
+            });
+            orderIDHeader.dispatchEvent(clickEvent);
+        });
+    </script>
 </body>
 
 
