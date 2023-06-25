@@ -127,3 +127,72 @@ function get_tokens($id): float
 
     return $row['tokens'];
 }
+
+
+function all_students(): array
+{
+    global $db;
+    $query = 'SELECT id,username,name,email,tokens FROM  users ;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $users = $statement->fetchAll();
+    $statement->closeCursor();
+    return $users;
+}
+
+
+
+function update_user_data($id, $username, $name, $email, $tokens)
+{
+    global $db;
+
+    $query = 'UPDATE users SET username = :username, name = :name, email = :email, tokens = :tokens WHERE id = :id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':tokens', $tokens);
+   
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
+
+
+function delete_user_data($id)
+{
+    global $db;
+
+    $query = 'DELETE FROM users WHERE id = :id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
+
+
+
+function add_user_data($id, $username, $name, $email, $tokens)
+{
+    global $db;
+
+    $query = 'INSERT INTO users (id, username, name, email, tokens) VALUES (:id, :username, :name, :email, :tokens)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':tokens', $tokens);
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
+

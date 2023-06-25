@@ -50,19 +50,19 @@ switch(@$_REQUEST['action'])
             else
                 if (check_username($_POST['username']))
                 {
-                    redirect_register("username already exists!");
+                    redirect_register("Username already exists!");
                     return;
                 }
                 if (check_email($_POST['email']))
                 {
-                    redirect_register("email already exists!");
+                    redirect_register("Email already exists!");
                     return;
                 }
                 if ($_POST['account'] == 'student')
                 {
                     if (!str_contains(strtolower($_POST['email']), 'chn') || !str_contains(strtolower($_POST['email']), '@ceconline.edu'))
                     {
-                        redirect_register("enter a valid student email address!");
+                        redirect_register("Enter a valid student email address!");
                         return;
                     }
                 }
@@ -251,7 +251,164 @@ switch(@$_REQUEST['action'])
         }
         header("Location: view/admin/main/template/orders.php");
         break;
+    
 
+        case 'save_edited_data':
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['username']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tokens'])) {
+                // Get the submitted form data
+                
+                $id = $_POST['id'];
+                $username = $_POST['username'];
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $tokens = $_POST['tokens'];
+        
+                // Update the user data in the database
+                $success = update_user_data($id, $username, $name, $email, $tokens);
+        
+                if ($success) {
+                    // Data updated successfully, send a success response
+                    echo "Data updated successfully.";
+                } else {
+                    // Failed to update data, send an error response
+                    echo "Failed to update data.";
+                }
+            } else {
+                // Invalid request, send an error response
+                echo "Invalid request.";
+            
+            }
+            break;
+        
+
+
+            case 'delete_user':
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
+                    $id = $_POST['id'];
+            
+                    // Delete the user record from the database
+                    $success = delete_user_data($id);
+            
+                    if ($success) {
+                        // User deleted successfully, send a success response
+                        echo "User deleted successfully.";
+                        exit();
+                    } else {
+                        // Failed to delete user, send an error response
+                        header("HTTP/1.1 500 Internal Server Error");
+                        echo "Failed to delete user.";
+                        exit();
+                    }
+                }
+                break;
+            
+
+
+
+                case 'save_item_data':
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id']) && isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price']) && isset($_POST['quantity']) ) {
+                        
+                        // Get the submitted form data
+                        $category_id = $_POST['category_id'];
+                        $id = $_POST['id'];
+                        $name = $_POST['name'];
+                        $price = $_POST['price'];
+                        $quantity = $_POST['quantity'];
+                
+                        // Update the user data in the database
+                        $success = update_item_data($category_id, $id, $name, $price, $quantity);
+                
+                        if ($success) {
+                            // Data updated successfully, send a success response
+                            echo "Data updated successfully.";
+                        } else {
+                            // Failed to update data, send an error response
+                            echo "Failed to update data.";
+                        }
+                    } else {
+                        // Invalid request, send an error response
+                        echo "Invalid request.";
+                    
+                    }
+                    break;
+                
+        
+        
+                
+             case 'delete_item':
+                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
+                            $name = $_POST['name'];
+                    
+                            // Delete the user record from the database
+                            $success = delete_item_data($name);
+                    
+                            if ($success) {
+                                // User deleted successfully, send a success response
+                                echo "User deleted successfully.";
+                                exit();
+                            } else {
+                                // Failed to delete user, send an error response
+                                header("HTTP/1.1 500 Internal Server Error");
+                                echo "Failed to delete user.";
+                                exit();
+                            }
+                        }
+                        break;
+
+
+                        case 'add_user':
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['username']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tokens'])) {
+                                // Get the submitted form data
+                                $id = $_POST['id'];
+                                $username = $_POST['username'];
+                                $name = $_POST['name'];
+                                $email = $_POST['email'];
+                                $tokens = $_POST['tokens'];
+                        
+                                // Insert the new user data into the database
+                                $success = add_user_data($id, $username, $name, $email, $tokens);
+                        
+                                if ($success) {
+                                    // User added successfully, send a success response
+                                    echo "User added successfully.";
+                                } else {
+                                    // Failed to add user, send an error response
+                                    echo "Failed to add user.";
+                                }
+                            } else {
+                                // Invalid request, send an error response
+                                echo "Invalid request.";
+                            }
+                            break;   
+                            
+                            
+
+                            case 'add_item':
+                                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id']) && isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price']) && isset($_POST['quantity']) ) {
+                                    // Get the submitted form data
+                                    $category_id = $_POST['category_id'];
+                                    $id = $_POST['id'];
+                                    $name = $_POST['name'];
+                                    $price = $_POST['price'];
+                                    $quantity = $_POST['quantity'];
+                            
+                                    // Insert the new user data into the database
+                                    $success = add_item_data($category_id, $id, $name, $price, $quantity);
+                            
+                                    if ($success) {
+                                        // User added successfully, send a success response
+                                        echo "Item added successfully.";
+                                    } else {
+                                        // Failed to add user, send an error response
+                                        echo "Failed to add item";
+                                    }
+                                } else {
+                                    // Invalid request, send an error response
+                                    echo "Invalid request.";
+                                }
+                                break;        
+            
+        
     default:
         redirect_home();
 }

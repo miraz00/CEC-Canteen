@@ -1,7 +1,24 @@
+<?php
+session_start();
+if($_SESSION['account'] != 'admin')
+{
+    echo "You are not authorized to visit this page!";
+    return;
+}
+date_default_timezone_set("Asia/Kolkata");
+
+header('Content-Type: text/html; charset=utf-8');
+
+require_once('../../../../model/canteen_db.php');
+require_once('../../../../model/users.php');
+require_once('../../../../model/items.php');
+
+?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="utf-8">
@@ -11,6 +28,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <!-- Custom Stylesheet -->
+    <link href="../../assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 
 </head>
@@ -87,373 +105,88 @@
 						<p class="mb-0">Your restaurent admin template</p>
 					</div>
                 </div>
+                
                 <div class="row">
-                    <div class="col-xl-7 col-xxl-12">
-                        <div class="card border-0 overflow-hidden">
-                            <div class="row no-gutters">
-                                <div class="col-lg-7">
-                                    <div class="image-wrapper">
-                                        <img class="img-fluid" src="../../assets/images/menu/11.jpg" alt="food menu">
-                                        <span class="ribbon ribbon__two mr-2">$50</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 pl-0">
-                                    <div class="card-body d-flex align-items-center h-100">
-                                        <ul class="w-100 m-0">
-                                            <li class="mb-4">
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="d-inline-block">Porota</h4>
-                                                    <span class="badge badge-primary">2 Piece</span>
-                                                </div>
-                                                <span>Classic marinara sauce</span>
-                                            </li>
-                                            <li class="mb-4">
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="d-inline-block">Chicken</h4>
-                                                    <span class="badge badge-primary">4 Piece</span>
-                                                </div>
-                                                <span>Classic marinara sauce</span>
-                                            </li>
-                                            <li class="mb-4">
-                                                <div class="d-flex justify-content-between">
-                                                    <h4 class="d-inline-block">Vegatible</h4>
-                                                    <span class="badge badge-primary">250 Gm</span>
-                                                </div>
-                                                <span>Classic marinara sauce</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-5 col-xxl-12">
-                        <div class="card border-0">
-                            <div class="card-body text-center text-md-left">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-xl-7 col-md-5 col-xxl-5">
-                                        <div class="image-wrapper">
-                                            <img class="img-fluid" src="../../assets/images/menu/food-image-4.jpg" alt="food menu">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-5 col-md-7 col-xxl-7 pl-4">
-                                        <div class="mt-5 mt-md-0">
-                                            <h4 class="mb-2">Chicken Grill With Drinks</h4>
-                                            <p><i>Best Offer from Chef</i></p>
-                                            <p>Classic marinara sauce, authentic old-world pepperoni, all-natural Ita</p>
-                                            <h4 class="text-primary">$ 2.60</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card border-0">
-                            <div class="image-wrapper text-center mb-2">
-                                <img class="img-fluid" src="../../assets/images/menu/coffee-image-1.jpg" alt="food menu">
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center px-3">
-                                    <h4>Cold Coffee</h4>
-                                    <p>Pepperoni, all-natural Ita</p>
-                                    <h4 class="text-primary">$2.60</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card border-0">
-                            <div class="image-wrapper text-center mb-2">
-                                <img class="img-fluid" src="../../assets/images/menu/coffee-image-5.jpg" alt="food menu">
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center px-3">
-                                    <h4>Hot Coffee</h4>
-                                    <p>Classic marinara sauce</p>
-                                    <h4 class="text-primary">$2.60</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card border-0">
-                            <div class="card-body">
-                                <div class="text-center pt-3">
-                                    <h4>Choclete Coffee</h4>
-                                    <p class="mb-1">Classic marinara sauce</p>
-                                    <h4 class="text-primary">$2.60</h4>
-                                </div>
-                            </div>
-                            <div class="image-wrapper text-center">
-                                <img class="img-fluid" src="../../assets/images/menu/coffee-image-6.jpg" alt="food menu">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card border-0">
-                            <div class="card-body">
-                                <div class="text-center pt-3">
-                                    <h4>Choclete Coffee</h4>
-                                    <p class="mb-1">Classic marinara sauce</p>
-                                    <h4 class="text-primary">$2.60</h4>
-                                </div>
-                            </div>
-                            <div class="image-wrapper text-center">
-                                <img class="img-fluid" src="../../assets/images/menu/coffee-image-4.jpg" alt="food menu">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-xxl-4 col-md-4 col-sm-6">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h4 class="card-title">Items</h4>
+            </div>
+            <div class="col-12">
                         <div class="card">
-                            <div class="image-wrapper">
-                                <img class="img-fluid" src="../../assets/images/menu/granny-menu7.jpg" alt="food menu">
-                            </div>
-                            <div class="card-body justify-content-between d-flex">
-                                    <h4 class="d-inline-block">Organic Salad</h4>
-                                <h4 class="d-inline-block">
-                                    <span class="text-primary">$65</span>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-xxl-4 col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="image-wrapper">
-                                <img class="img-fluid" src="../../assets/images/menu/granny-menu6.jpg" alt="food menu">
-                            </div>
-                            <div class="card-body justify-content-between d-flex">
-                                    <h4 class="d-inline-block">Chicken Fried</h4>
-                                <h4 class="d-inline-block">
-                                    <span class="text-primary">$56</span>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-xxl-4 col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="image-wrapper">
-                                <img class="img-fluid" src="../../assets/images/menu/granny-menu5.jpg" alt="food menu">
-                            </div>
-                            <div class="card-body justify-content-between d-flex">
-                                    <h4 class="d-inline-block">Chicken Wings</h4>
-                                <h4 class="d-inline-block">
-                                    <span class="text-primary">$39</span>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-xxl-4 col-md-4 col-sm-6">
-                        <div class="card">
-                            <div class="image-wrapper">
-                                <img class="img-fluid" src="../../assets/images/menu/granny-menu16.jpg" alt="food menu">
-                            </div>
-                            <div class="card-body justify-content-between d-flex">
-                                    <h4 class="d-inline-block">Masala Chicken Fried</h4>
-                                <h4 class="d-inline-block">
-                                    <span class="text-primary">$26</span>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="card-header">
+                                <div class="table-responsive">
+                                    <table id="example2" class="display" style="width:100%">
+                                    
+                        <thead>
+                            <tr>
+                                <th scope="col">Category</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $items = all_items();
+                            foreach ($items as $item): ?>
+                                <tr>
+                                <td>
+                                        <span class="data"><?= $item['category_id'] ?></span>
+                                        <form class="edit-form" style="display: none;">
+                                            <input type="number" name="category_id" value="<?= $item['category_id'] ?>">
+                                        </form>
+                                    </td>
+                                
+                                    <td>
+                                        <span class="data"><?= $item['id'] ?></span>
+                                        <form class="edit-form" style="display: none;">
+                                            <input type="number" name="id" value="<?= $item['id'] ?>">
+                                        </form>
+                                    </td>
 
-					<div class="col-xl-3 col-sm-6 col-xxl-6">
-                        <div class="card vertical-card__menu">
-                            <span class="ribbon ribbon__one vertical-card__menu--status closed">Close <em class="ribbon-curve"></em></span>
-                            <div class="card-header p-0">
-                                <div class="vertical-card__menu--image">
-                                    <img src="../../assets/images/menu/granny-menu13.jpg" alt="Menu">
-                                </div>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="vertical-card__menu--desc p-3">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="vertical-card__menu--title">Chicken Roll</h4>
-                                        <div class="vertical-card__menu--fav">
-                                            <a href="javascript:void()"><i class="fa fa-heart-o"></i></a>
+                                    <td>
+                                        <span class="data"><?= $item['name'] ?></span>
+                                        <form class="edit-form" style="display: none;">
+                                            <input type="text" name="name" value="<?= $item['name'] ?>">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <span class="data"><?= $item['price'] ?></span>
+                                        <form class="edit-form" style="display: none;">
+                                            <input type="number" name="price" value="<?= $item['price'] ?>">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <span class="data"><?= $item['quantity'] ?></span>
+                                        <form class="edit-form" style="display: none;">
+                                            <input type="number" name="quantity" value="<?= $item['quantity'] ?>">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <button class="btn btn-sm btn-primary edit-button">Edit</button>
+                                            <button class="btn btn-sm btn-success save-button" style="display: none;">Save</button>
+                                            <button class="btn btn-sm btn-danger delete-button">Delete</button>
                                         </div>
-                                    </div>
-                                    <p>Apple Juice, Beef Roast, Cheese Burger</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="vertical-card__menu--price">$<span>54</span></h2>
-                                        <div class="vertical-card__menu--rating c-pointer">
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star-o"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <div class="vertical-card__menu--location">
-                                    <div class="d-block">
-                                        <span class="icon"><i class="fa fa-map-marker"></i></span>
-                                        Bristol, Bristol
-                                    </div>
-                                    <div>
-                                        <span class="icon"><i class="fa fa-motorcycle"></i></span>
-                                        <span>10 min</span>
-                                        <span class="icon ml-2"><i class="fa fa-clock-o"></i></span>
-                                        <span>15min</span>
-                                    </div>
-                                </div>
-                                <div class="vertical-card__menu--button">
-                                    <button class="btn btn-primary">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-xl-3 col-sm-6 col-xxl-6">
-                        <div class="card vertical-card__menu">
-                            <span class="ribbon ribbon__one vertical-card__menu--status closed">Close <em class="ribbon-curve"></em></span>
-                            <div class="card-header p-0">
-                                <div class="vertical-card__menu--image">
-                                    <img src="../../assets/images/menu/granny-menu12.jpg" alt="Menu">
-                                </div>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="vertical-card__menu--desc p-3">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="vertical-card__menu--title">Chicken Grill</h4>
-                                        <div class="vertical-card__menu--fav">
-                                            <a href="javascript:void()"><i class="fa fa-heart-o"></i></a>
-                                        </div>
-                                    </div>
-                                    <p>Apple Juice, Beef Roast, Cheese Burger</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="vertical-card__menu--price">$<span>54</span></h2>
-                                        <div class="vertical-card__menu--rating c-pointer">
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star-o"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <div class="vertical-card__menu--location">
-                                    <div class="d-block">
-                                        <span class="icon"><i class="fa fa-map-marker"></i></span>
-                                        Bristol, Bristol
-                                    </div>
-                                    <div>
-                                        <span class="icon"><i class="fa fa-motorcycle"></i></span>
-                                        <span>10 min</span>
-                                        <span class="icon ml-2"><i class="fa fa-clock-o"></i></span>
-                                        <span>15min</span>
-                                    </div>
-                                </div>
-                                <div class="vertical-card__menu--button">
-                                    <button class="btn btn-primary">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-xl-3 col-sm-6 col-xxl-6">
-                        <div class="card vertical-card__menu">
-                            <span class="ribbon ribbon__one vertical-card__menu--status closed">Close <em class="ribbon-curve"></em></span>
-                            <div class="card-header p-0">
-                                <div class="vertical-card__menu--image">
-                                    <img src="../../assets/images/menu/granny-menu11.jpg" alt="Menu">
-                                </div>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="vertical-card__menu--desc p-3">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="vertical-card__menu--title">Fried Egg Sandwich</h4>
-                                        <div class="vertical-card__menu--fav">
-                                            <a href="javascript:void()"><i class="fa fa-heart-o"></i></a>
-                                        </div>
-                                    </div>
-                                    <p>Apple Juice, Beef Roast, Cheese Burger</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="vertical-card__menu--price">$<span>54</span></h2>
-                                        <div class="vertical-card__menu--rating c-pointer">
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star-o"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <div class="vertical-card__menu--location">
-                                    <div class="d-block">
-                                        <span class="icon"><i class="fa fa-map-marker"></i></span>
-                                        Bristol, Bristol
-                                    </div>
-                                    <div>
-                                        <span class="icon"><i class="fa fa-motorcycle"></i></span>
-                                        <span>10 min</span>
-                                        <span class="icon ml-2"><i class="fa fa-clock-o"></i></span>
-                                        <span>15min</span>
-                                    </div>
-                                </div>
-                                <div class="vertical-card__menu--button">
-                                    <button class="btn btn-primary">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-xl-3 col-sm-6 col-xxl-6">
-                        <div class="card vertical-card__menu">
-                            <span class="ribbon ribbon__one vertical-card__menu--status closed">Close <em class="ribbon-curve"></em></span>
-                            <div class="card-header p-0">
-                                <div class="vertical-card__menu--image">
-                                    <img src="../../assets/images/menu/granny-menu10.jpg" alt="Menu">
-                                </div>
-                            </div>
-                            <div class="card-body p-0">
-                                <div class="vertical-card__menu--desc p-3">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="vertical-card__menu--title">French Crostini</h4>
-                                        <div class="vertical-card__menu--fav">
-                                            <a href="javascript:void()"><i class="fa fa-heart-o"></i></a>
-                                        </div>
-                                    </div>
-                                    <p>Apple Juice, Beef Roast, Cheese Burger</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="vertical-card__menu--price">$<span>54</span></h2>
-                                        <div class="vertical-card__menu--rating c-pointer">
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star"></i></span>
-                                            <span class="icon"><i class="fa fa-star-o"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between align-items-center">
-                                <div class="vertical-card__menu--location">
-                                    <div class="d-block">
-                                        <span class="icon"><i class="fa fa-map-marker"></i></span>
-                                        Bristol, Bristol
-                                    </div>
-                                    <div>
-                                        <span class="icon"><i class="fa fa-motorcycle"></i></span>
-                                        <span>10 min</span>
-                                        <span class="icon ml-2"><i class="fa fa-clock-o"></i></span>
-                                        <span>15min</span>
-                                    </div>
-                                </div>
-                                <div class="vertical-card__menu--button">
-                                    <button class="btn btn-primary">Order Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                        
+                    </table>
+                    <div class="d-flex  justify-content-center">
+                    <button class=" btn btn-success btn-lg add-button">ADD ITEM</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-				</div>
+
+
             </div>
         </div>
         <!--**********************************
@@ -464,7 +197,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
+       <div class="footer">
             <div class="copyright">
                 <p><a href="templatespoint.net">Templates Point</a></p>
             </div>
@@ -691,8 +424,152 @@
     <script src="../js/quixnav.js"></script>
     <script src="../js/styleSwitcher.js"></script>
     
+    <!-- Datatables -->
+    <script src="../../assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- Init files -->
+    <script src="../js/dashboard/dashboard-5.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+    $(document).ready(function () {
+        $('.edit-button').click(function () {
+            var row = $(this).closest('tr');
+            row.find('.data').hide();
+            row.find('.edit-form').show();
+            row.find('.edit-button').hide();
+            row.find('.save-button').show();
+        });
+
+        $('.save-button').click(function () {
+            var row = $(this).closest('tr');
+            var form = row.find('.edit-form');
+            var data = form.serialize();
+            $.ajax({
+                url: '../../../../index.php?action=save_item_data',
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    if (response === "Data updated successfully.") {
+                        // Display a success message or perform any desired action
+                        row.find('.data').show().text(form.find('input').val());
+                        form.hide();
+                        row.find('.edit-button').show();
+                        row.find('.save-button').hide();
+                    } else {
+                        // Display an error message or perform any desired action
+                        alert("Failed to update data.");
+                    }
+                },
+                error: function () {
+                    // Handle the error if the AJAX request fails
+                    alert("Failed to update data. Please try again.");
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+$(document).ready(function () {
+    $('.delete-button').click(function () {
+        var row = $(this).closest('tr');
+        var category_id = row.find('.data-category_id').text();
+
+        // Confirm deletion with user
+        if (confirm("Are you sure you want to delete this user?")) {
+            var data = {
+                action: 'delete_user_data',
+                category_id: category_id
+            };
+
+            $.ajax({
+                url: '../../../../index.php?action=delete_item',
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    // Handle the response from the server if needed
+                    // For example, you can display a success message or refresh the table
+                    row.remove();
+                    alert("User deleted successfully.");
+                },
+                error: function (xhr, status, error) {
+                    // Handle the error if the AJAX request fails
+                    alert("Failed to delete user.");
+                }
+            });
+        }
+    });
+});
+</script>
+
+<script>
+   $(document).ready(function() {
+    // Add User button click event using event delegation
+    $(document).on('click', '.add-button', function() {
+        // Create a new row HTML
+        var newRow = '<tr>' +
+            
+            '<td><input type="number" name="new_category_id" class="form-control" placeholder="Category"></td>' +
+            '<td><input type="number" name="new_id" class="form-control" placeholder="Id"></td>' +
+            '<td><input type="text" name="new_name" class="form-control" placeholder="Name"></td>' +
+            '<td><input type="number" name="new_price" class="form-control" placeholder="Price"></td>' +
+            '<td><input type="number" name="new_quantity" class="form-control" placeholder="Quantity"></td>' +
+            
+            '<td>' +
+            '<div class="actions">' +
+            '<button class="btn btn-sm btn-success save-button">Save</button>' +
+            '</div>' +
+            '</td>' +
+            '</tr>';
+
+        // Append the new row to the table body
+        $('#example2 tbody').append(newRow);
+    });
+
+    // Save button click event for dynamically added rows
+    $(document).on('click', '.save-button', function() {
+        var row = $(this).closest('tr');
+        var category_id = row.find('[name="new_category_id"]').val();
+        var id = row.find('[name="new_id"]').val();
+        var name = row.find('[name="new_username"]').val();
+        var price = row.find('[name="new_price"]').val();
+        var quantity = row.find('[name="new_quantity"]').val();
+       
+
+        // Perform validation on the entered data if needed
+
+        // Send the AJAX request to save the new user data
+        $.ajax({
+            url: '../../../../index.php?action=add_item',
+            method: 'POST',
+            data: {
+                category_id: category_id,
+                id: id,
+                name: name,
+                price: price,
+                quantity: quantity
+            },
+            success: function(response) {
+                // Handle the response from the server if needed
+                // For example, display a success message or refresh the table
+                alert("Item added successfully.");
+            },
+            error: function(xhr, status, error) {
+                // Handle the error if the AJAX request fails
+                alert("Failed to add item.");
+            }
+        });
+
+        // Remove the new row from the table
+        row.remove();
+    });
+});
+</script>
+
+
 
 </body>
-
 
 </html>
