@@ -51,7 +51,7 @@
     <?php endif?>
 
     <?php if(isset($_SESSION['script'])) ?>
-        <?php echo $_SESSION['script'];$_SESSION['script'] = Null; ?>
+        <?php echo @$_SESSION['script']; @$_SESSION['script'] = Null; ?>
 
     <title><?php if(isset($title)) echo htmlspecialchars($title)?></title>
 </head>

@@ -127,3 +127,54 @@ function get_tokens($id): float
 
     return $row['tokens'];
 }
+
+
+function all_students(): array
+{
+    global $db;
+    $query = 'SELECT username,name,email,tokens FROM  users ;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $users = $statement->fetchAll();
+    $statement->closeCursor();
+    return $users;
+}
+
+
+
+function update_user_data($username, $name, $email, $tokens)
+{
+    global $db;
+
+    $query = 'UPDATE users SET  name = :name, email = :email, tokens = :tokens WHERE username = :username';
+    $statement = $db->prepare($query);
+    
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':tokens', $tokens);
+   
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
+
+
+function delete_user_data($username)
+{
+    global $db;
+
+    $query = 'DELETE FROM users WHERE username = :username';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
+
+
+
