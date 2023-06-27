@@ -94,6 +94,7 @@ $orders = $_SESSION['orders'];
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                <?php $total=0 ?>
                                                 <?php foreach ($items as $item): ?>
                                                     <tr>
                                                         <th scope="row"><?= $item['item_name'] ?></th>

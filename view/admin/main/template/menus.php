@@ -120,8 +120,7 @@ require_once('../../../../model/items.php');
                                     
                         <thead>
                             <tr>
-                                <th scope="col">Category</th>
-                                <th scope="col">Id</th>
+                                <th scope="col">Category Name</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
@@ -133,18 +132,13 @@ require_once('../../../../model/items.php');
                             foreach ($items as $item): ?>
                                 <tr>
                                 <td>
-                                        <span class="data"><?= $item['category_id'] ?></span>
+                                        <span class="data"><?= $item['category_name'] ?></span>
                                         <form class="edit-form" style="display: none;">
-                                            <input type="number" name="category_id" value="<?= $item['category_id'] ?>">
+                                            <input type="text" name="category_name" value="<?= $item['category_name'] ?>">
                                         </form>
                                     </td>
                                 
-                                    <td>
-                                        <span class="data"><?= $item['id'] ?></span>
-                                        <form class="edit-form" style="display: none;">
-                                            <input type="number" name="id" value="<?= $item['id'] ?>">
-                                        </form>
-                                    </td>
+                                
 
                                     <td>
                                         <span class="data"><?= $item['name'] ?></span>
@@ -189,235 +183,8 @@ require_once('../../../../model/items.php');
 
             </div>
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
         
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
-       <div class="footer">
-            <div class="copyright">
-                <p><a href="templatespoint.net">Templates Point</a></p>
-            </div>
-        </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-        
-        <!--**********************************
-            Right sidebar start
-        ***********************************-->
-        <div class="sidebar-right">
-            <a class="sidebar-right-trigger gradient-5-x" href="javascript:void(0)">
-                <span><i class="fa fa-cog fa-spin"></i></span>
-            </a>
-            <div class="sidebar-right-inner">
-                <div class="admin-settings">
-                    <h4>Pick your style</h4>
-                    <div>
-                        <p>Background</p>
-                        <select class="form-control" name="theme_version" id="theme_version">
-                            <option value="light">Light</option>
-                            <option value="dark">Dark</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Layout</p>
-                        <select class="form-control" name="theme_layout" id="theme_layout">
-                            <option value="vertical">Vertical</option>
-                            <option value="horizontal">Horizontal</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Sidebar</p>
-                        <select class="form-control" name="sidebar_style" id="sidebar_style">
-                            <option value="full">Full</option>
-                            <option value="mini">Mini</option>
-                            <option value="compact">Compact</option>
-                            <option value="overlay">Overlay</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Sidebar position</p>
-                        <select class="form-control" name="sidebar_position" id="sidebar_position">
-                            <option value="static">Static</option>
-                            <option value="fixed">Fixed</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Header position</p>
-                        <select class="form-control" name="header_position" id="header_position">
-                            <option value="static">Static</option>
-                            <option value="fixed">Fixed</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Container</p>
-                        <select class="form-control" name="container_layout" id="container_layout">
-                            <option value="wide">Wide</option>
-                            <option value="boxed">Boxed</option>
-                            <option value="wide-boxed">Wide Boxed</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Direction</p>
-                        <select class="form-control" name="theme_direction" id="theme_direction">
-                            <option value="ltr">LTR</option>
-                            <option value="rtl">RTL</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Navigation Header</p>
-                        <div>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_1" class="filled-in chk-col-primary" id="nav_header_bg_1">
-                                <label for="nav_header_bg_1"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_2" class="filled-in chk-col-primary" id="nav_header_bg_2">
-                                <label for="nav_header_bg_2"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_3" class="filled-in chk-col-primary" id="nav_header_bg_3">
-                                <label for="nav_header_bg_3"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_4" class="filled-in chk-col-primary" id="nav_header_bg_4">
-                                <label for="nav_header_bg_4"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_5" class="filled-in chk-col-primary" id="nav_header_bg_5">
-                                <label for="nav_header_bg_5"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_6" class="filled-in chk-col-primary" id="nav_header_bg_6">
-                                <label for="nav_header_bg_6"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_7" class="filled-in chk-col-primary" id="nav_header_bg_7">
-                                <label for="nav_header_bg_7"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_8" class="filled-in chk-col-primary" id="nav_header_bg_8">
-                                <label for="nav_header_bg_8"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_9" class="filled-in chk-col-primary" id="nav_header_bg_9">
-                                <label for="nav_header_bg_9"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_10" class="filled-in chk-col-primary" id="nav_header_bg_10">
-                                <label for="nav_header_bg_10"></label>
-                            </span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Header</p>
-                        <div>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_1" class="filled-in chk-col-primary" id="header_bg_1">
-                                <label for="header_bg_1"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_2" class="filled-in chk-col-primary" id="header_bg_2">
-                                <label for="header_bg_2"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_3" class="filled-in chk-col-primary" id="header_bg_3">
-                                <label for="header_bg_3"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_4" class="filled-in chk-col-primary" id="header_bg_4">
-                                <label for="header_bg_4"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_5" class="filled-in chk-col-primary" id="header_bg_5">
-                                <label for="header_bg_5"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_6" class="filled-in chk-col-primary" id="header_bg_6">
-                                <label for="header_bg_6"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_7" class="filled-in chk-col-primary" id="header_bg_7">
-                                <label for="header_bg_7"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_8" class="filled-in chk-col-primary" id="header_bg_8">
-                                <label for="header_bg_8"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_9" class="filled-in chk-col-primary" id="header_bg_9">
-                                <label for="header_bg_9"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_10" class="filled-in chk-col-primary" id="header_bg_10">
-                                <label for="header_bg_10"></label>
-                            </span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Sidebar</p>
-                        <div>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_1" class="filled-in chk-col-primary" id="sidebar_bg_1">
-                                <label for="sidebar_bg_1"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_2" class="filled-in chk-col-primary" id="sidebar_bg_2">
-                                <label for="sidebar_bg_2"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_3" class="filled-in chk-col-primary" id="sidebar_bg_3">
-                                <label for="sidebar_bg_3"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_4" class="filled-in chk-col-primary" id="sidebar_bg_4">
-                                <label for="sidebar_bg_4"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_5" class="filled-in chk-col-primary" id="sidebar_bg_5">
-                                <label for="sidebar_bg_5"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_6" class="filled-in chk-col-primary" id="sidebar_bg_6">
-                                <label for="sidebar_bg_6"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_7" class="filled-in chk-col-primary" id="sidebar_bg_7">
-                                <label for="sidebar_bg_7"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_8" class="filled-in chk-col-primary" id="sidebar_bg_8">
-                                <label for="sidebar_bg_8"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_9" class="filled-in chk-col-primary" id="sidebar_bg_9">
-                                <label for="sidebar_bg_9"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_10" class="filled-in chk-col-primary" id="sidebar_bg_10">
-                                <label for="sidebar_bg_10"></label>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-            Right sidebar end
-        ***********************************-->
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
+    
     <script src="../../assets/plugins/common/common.min.js"></script>
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
@@ -511,8 +278,16 @@ $(document).ready(function () {
         // Create a new row HTML
         var newRow = '<tr>' +
             
-            '<td><input type="number" name="new_category_id" class="form-control" placeholder="Category"></td>' +
-            '<td><input type="number" name="new_id" class="form-control" placeholder="Id"></td>' +
+        '<td>' +
+                '<select name="new_category_name" class="form-control">' +
+                
+                '<option value="Beverages">Beverages</option>' +
+                '<option value="Breakfast">Breakfast</option>' +
+                '<option value="Desserts">Desserts</option>' +
+                '<option value="Rice Dishes">Rice Dishes</option>' +
+                '<option value="Snacks">Snacks</option>' +
+                '</select>' +
+                '</td>' +
             '<td><input type="text" name="new_name" class="form-control" placeholder="Name"></td>' +
             '<td><input type="number" name="new_price" class="form-control" placeholder="Price"></td>' +
             '<td><input type="number" name="new_quantity" class="form-control" placeholder="Quantity"></td>' +
@@ -531,9 +306,8 @@ $(document).ready(function () {
     // Save button click event for dynamically added rows
     $(document).on('click', '.save-button', function() {
         var row = $(this).closest('tr');
-        var category_id = row.find('[name="new_category_id"]').val();
-        var id = row.find('[name="new_id"]').val();
-        var name = row.find('[name="new_username"]').val();
+        var category_name = row.find('[name="new_category_name"]').val();
+        var name = row.find('[name="new_name"]').val();
         var price = row.find('[name="new_price"]').val();
         var quantity = row.find('[name="new_quantity"]').val();
        
@@ -545,8 +319,7 @@ $(document).ready(function () {
             url: '../../../../index.php?action=add_item',
             method: 'POST',
             data: {
-                category_id: category_id,
-                id: id,
+                category_name: category_name,
                 name: name,
                 price: price,
                 quantity: quantity
@@ -567,6 +340,7 @@ $(document).ready(function () {
     });
 });
 </script>
+
 
 
 

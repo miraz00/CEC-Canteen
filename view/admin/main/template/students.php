@@ -113,10 +113,10 @@ require_once('../../../../model/users.php');
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="custommers" class="display" style="min-width: 845px">
+                    <table id="example2" class="display" style="min-width: 845px">
                         <thead>
                             <tr>
-                                <th scope="col">Id</th>
+                                
                                 <th scope="col">Username</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
@@ -129,12 +129,7 @@ require_once('../../../../model/users.php');
                             foreach ($users as $user): ?>
                                 <tr>
 
-                                    <td>
-                                        <span class="data"><?= $user['id'] ?></span>
-                                        <form class="edit-form" style="display: none;">
-                                            <input type="text" name="id" value="<?= $user['id'] ?>">
-                                        </form>
-                                    </td>
+                                   
 
                                     <td>
                                         <span class="data"><?= $user['username'] ?></span>
@@ -172,9 +167,7 @@ require_once('../../../../model/users.php');
                         </tbody>
                     </table>
 
-                    <div class="d-flex  justify-content-center">
-                    <button class=" btn btn-success btn-lg add-button">ADD USER</button>
-                </div>
+
 
 
                 </div>
@@ -473,13 +466,13 @@ require_once('../../../../model/users.php');
 $(document).ready(function () {
     $('.delete-button').click(function () {
         var row = $(this).closest('tr');
-        var id = row.find('.edit-form input[name="id"]').val();
+        var username = row.find('.edit-form input[name="username"]').val();
 
         // Confirm deletion with user
         if (confirm("Are you sure you want to delete this user?")) {
             var data = {
                 action: 'delete_user_data',
-                id: id
+                username: username
             };
 
             $.ajax({
@@ -502,67 +495,7 @@ $(document).ready(function () {
 });
 </script>
 
-<script>
-   $(document).ready(function() {
-    // Add User button click event using event delegation
-    $(document).on('click', '.add-button', function() {
-        // Create a new row HTML
-        var newRow = '<tr>' +
-            '<td><input type="text" name="new_id" class="form-control" placeholder="Id"></td>' +
-            '<td><input type="text" name="new_username" class="form-control" placeholder="Username"></td>' +
-            '<td><input type="text" name="new_name" class="form-control" placeholder="Name"></td>' +
-            '<td><input type="email" name="new_email" class="form-control" placeholder="Email"></td>' +
-            '<td><input type="text" name="new_tokens" class="form-control" placeholder="Tokens"></td>' +
-            '<td>' +
-            '<div class="actions">' +
-            '<button class="btn btn-sm btn-success save-button">Save</button>' +
-            '</div>' +
-            '</td>' +
-            '</tr>';
 
-        // Append the new row to the table body
-        $('#custommers tbody').append(newRow);
-    });
-
-    // Save button click event for dynamically added rows
-    $(document).on('click', '.save-button', function() {
-        var row = $(this).closest('tr');
-        var id = row.find('[name="new_id"]').val();
-        var username = row.find('[name="new_username"]').val();
-        var name = row.find('[name="new_name"]').val();
-        var email = row.find('[name="new_email"]').val();
-        var tokens = row.find('[name="new_tokens"]').val();
-
-        // Perform validation on the entered data if needed
-
-        // Send the AJAX request to save the new user data
-        $.ajax({
-            url: '../../../../index.php?action=add_user',
-            method: 'POST',
-            data: {
-                id: id,
-                username: username,
-                name: name,
-                email: email,
-                tokens: tokens
-            },
-            success: function(response) {
-                // Handle the response from the server if needed
-                // For example, display a success message or refresh the table
-                alert("User added successfully.");
-            },
-            error: function(xhr, status, error) {
-                // Handle the error if the AJAX request fails
-                alert("Failed to add user.");
-            }
-        });
-
-        // Remove the new row from the table
-        row.remove();
-    });
-});
-
-</script>
 
 
 

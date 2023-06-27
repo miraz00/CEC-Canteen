@@ -254,17 +254,17 @@ switch(@$_REQUEST['action'])
     
 
         case 'save_edited_data':
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['username']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tokens'])) {
+            if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST['username']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tokens'])) {
                 // Get the submitted form data
                 
-                $id = $_POST['id'];
+                
                 $username = $_POST['username'];
                 $name = $_POST['name'];
                 $email = $_POST['email'];
                 $tokens = $_POST['tokens'];
         
                 // Update the user data in the database
-                $success = update_user_data($id, $username, $name, $email, $tokens);
+                $success = update_user_data($username, $name, $email, $tokens);
         
                 if ($success) {
                     // Data updated successfully, send a success response
@@ -283,11 +283,11 @@ switch(@$_REQUEST['action'])
 
 
             case 'delete_user':
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
-                    $id = $_POST['id'];
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'])) {
+                    $username = $_POST['username'];
             
                     // Delete the user record from the database
-                    $success = delete_user_data($id);
+                    $success = delete_user_data($username);
             
                     if ($success) {
                         // User deleted successfully, send a success response
@@ -306,17 +306,16 @@ switch(@$_REQUEST['action'])
 
 
                 case 'save_item_data':
-                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id']) && isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price']) && isset($_POST['quantity']) ) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id']) && isset($_POST['name']) && isset($_POST['price']) && isset($_POST['quantity']) ) {
                         
                         // Get the submitted form data
                         $category_id = $_POST['category_id'];
-                        $id = $_POST['id'];
                         $name = $_POST['name'];
                         $price = $_POST['price'];
                         $quantity = $_POST['quantity'];
                 
                         // Update the user data in the database
-                        $success = update_item_data($category_id, $id, $name, $price, $quantity);
+                        $success = update_item_data($category_id, $name, $price, $quantity);
                 
                         if ($success) {
                             // Data updated successfully, send a success response
@@ -356,46 +355,21 @@ switch(@$_REQUEST['action'])
                         break;
 
 
-                        case 'add_user':
-                            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['username']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['tokens'])) {
-                                // Get the submitted form data
-                                $id = $_POST['id'];
-                                $username = $_POST['username'];
-                                $name = $_POST['name'];
-                                $email = $_POST['email'];
-                                $tokens = $_POST['tokens'];
                         
-                                // Insert the new user data into the database
-                                $success = add_user_data($id, $username, $name, $email, $tokens);
-                        
-                                if ($success) {
-                                    // User added successfully, send a success response
-                                    echo "User added successfully.";
-                                } else {
-                                    // Failed to add user, send an error response
-                                    echo "Failed to add user.";
-                                }
-                            } else {
-                                // Invalid request, send an error response
-                                echo "Invalid request.";
-                            }
-                            break;   
-                            
                             
 
                             case 'add_item':
-                                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id']) && isset($_POST['id']) && isset($_POST['name']) && isset($_POST['price']) && isset($_POST['quantity']) ) {
+                                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_name'])  && isset($_POST['name']) && isset($_POST['price']) && isset($_POST['quantity']) ) {
                                     // Get the submitted form data
-                                    $category_id = $_POST['category_id'];
-                                    $id = $_POST['id'];
+                                    $category_name = $_POST['category_name'];
                                     $name = $_POST['name'];
                                     $price = $_POST['price'];
                                     $quantity = $_POST['quantity'];
                             
                                     // Insert the new user data into the database
-                                    $success = add_item_data($category_id, $id, $name, $price, $quantity);
+                                    $item_insert_statement = add_item_data($category_name, $name, $price, $quantity);
                             
-                                    if ($success) {
+                                    if ($item_insert_statement) {
                                         // User added successfully, send a success response
                                         echo "Item added successfully.";
                                     } else {

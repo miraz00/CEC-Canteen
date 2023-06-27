@@ -67,6 +67,29 @@ a{
     font-size: 130px;
     
   }
+
+  @media (max-width: 768px) {
+    .wrapper {
+        
+        place-items: bottom;
+        
+      }
+    .typing-demo {
+      width: 100%;
+      font-size: 45px;
+      text-align: center;
+      border-right: 5px solid;
+     
+    }
+    .bck-header {
+        height: 100%;
+    
+    }
+  }
+
+
+
+
   
   @keyframes typing {
     from {
@@ -509,6 +532,10 @@ a{
         grid-column-gap:16px ;
     }
 }
+
+
+
+
 
 /*========End of Cards Section=======*/
 

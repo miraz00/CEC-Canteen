@@ -17,7 +17,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
                         <h5>Master Chefs</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <p>"Our Canteen's Master Chef is a culinary expert with exceptional skills and expertise in crafting delicious and diverse dishes for our customers."</p>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
                         <h5>Quality Food</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <p>"Savor the finest flavors and ingredients, meticulously prepared to bring you a culinary experience of unparalleled quality and taste."</p>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,8 @@
                     <div class="p-4">
                         <i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
                         <h5>Online Order</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <p> "Experience the convenience of ordering food online, with a wide selection of delicious dishes delivered straight right to you"
+</p>
                     </div>
                 </div>
             </div>
@@ -43,8 +44,8 @@
                 <div class="service-item rounded pt-3">
                     <div class="p-4">
                         <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                        <h5>24/7 Service</h5>
-                        <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+                        <h5>CEC Tokens</h5>
+                        <p>CEC Token is a digital currency that empowers students to conveniently purchase meals and place orders within our campus canteen ecosystem.</p>
                     </div>
                 </div>
             </div>
@@ -61,7 +62,7 @@
     <div class="food-container">
         <!--======Card Start ----============-->
         <article class="food-card">
-            <img src="https://images.pexels.com/photos/574111/pexels-photo-574111.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" class="food-img" alt="">
+            <img src="view/img/breakfast.jpg" class="food-img" alt="">
             <div class="img-text">
                 <h1>Breakfast</h1>
             </div>
@@ -75,7 +76,7 @@
             </div>
         </article>
         <article class="food-card">
-            <img src="https://images.pexels.com/photos/14457194/pexels-photo-14457194.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="food-img" alt="">
+            <img src="view/img/kerala_sadya.jpg" class="food-img" alt="">
             <div class="img-text">
                 <h1>Rice Dishes</h1>
             </div>
@@ -89,7 +90,7 @@
             </div>
         </article>
         <article class="food-card">
-            <img src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="food-img" alt="">
+            <img src="view/img/curries.jpg" class="food-img" alt="">
             <div class="img-text">
                 <h1>Curries</h1>
             </div>
@@ -103,7 +104,7 @@
             </div>
         </article>
         <article class="food-card">
-            <img src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="food-img" alt="">
+            <img src="view/img/snacks.jpg" class="food-img" alt="">
             <div class="img-text">
                 <h1>Snacks</h1>
             </div>
@@ -117,7 +118,7 @@
             </div>
         </article>
         <article class="food-card">
-            <img src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="food-img" alt="">
+            <img src="view/img/coft.webp" class="food-img" alt="">
             <div class="img-text">
                 <h1>Beverages</h1>
             </div>
@@ -131,7 +132,7 @@
             </div>
         </article>
         <article class="food-card">
-            <img src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" class="food-img" alt="">
+            <img src="view/img/desserts.jpg" class="food-img" alt="">
             <div class="img-text">
                 <h1>Desserts</h1>
             </div>

@@ -132,7 +132,7 @@ function get_tokens($id): float
 function all_students(): array
 {
     global $db;
-    $query = 'SELECT id,username,name,email,tokens FROM  users ;';
+    $query = 'SELECT username,name,email,tokens FROM  users ;';
     $statement = $db->prepare($query);
     $statement->execute();
     $users = $statement->fetchAll();
@@ -142,13 +142,13 @@ function all_students(): array
 
 
 
-function update_user_data($id, $username, $name, $email, $tokens)
+function update_user_data($username, $name, $email, $tokens)
 {
     global $db;
 
-    $query = 'UPDATE users SET username = :username, name = :name, email = :email, tokens = :tokens WHERE id = :id';
+    $query = 'UPDATE users SET  name = :name, email = :email, tokens = :tokens WHERE username = :username';
     $statement = $db->prepare($query);
-    $statement->bindValue(':id', $id);
+    
     $statement->bindValue(':username', $username);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':email', $email);
@@ -162,37 +162,19 @@ function update_user_data($id, $username, $name, $email, $tokens)
 }
 
 
-function delete_user_data($id)
+function delete_user_data($username)
 {
     global $db;
 
-    $query = 'DELETE FROM users WHERE id = :id';
+    $query = 'DELETE FROM users WHERE username = :username';
     $statement = $db->prepare($query);
-    $statement->bindValue(':id', $id);
-
-    $success = $statement->execute();
-    $statement->closeCursor();
-
-    return $success;
-}
-
-
-
-function add_user_data($id, $username, $name, $email, $tokens)
-{
-    global $db;
-
-    $query = 'INSERT INTO users (id, username, name, email, tokens) VALUES (:id, :username, :name, :email, :tokens)';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':id', $id);
     $statement->bindValue(':username', $username);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':email', $email);
-    $statement->bindValue(':tokens', $tokens);
 
     $success = $statement->execute();
     $statement->closeCursor();
 
     return $success;
 }
+
+
 
