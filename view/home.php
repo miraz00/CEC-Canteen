@@ -146,5 +146,11 @@
         </article>
     </div>
 </section>
-
+<section style="padding-bottom: 2rem;">
+    <form action="" method="post" style="display: flex;justify-content: center;">
+        <textarea name="text" class="feedback-input" placeholder="Give your feedback"></textarea>
+        <button type="submit" value="Submit" class="btn btn-primary" style="margin-left: 1rem;">Submit</button>
+        <input type="hidden" name="action" value="feedback">
+    </form>
+</section>
 <!--orders section end-->

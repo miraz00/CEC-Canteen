@@ -217,3 +217,37 @@ function update_order_status($status, $status_value, $order_id): void
     $statement->execute();
     $statement->closeCursor();
 }
+
+function orders_this_month()
+{
+    global $db;
+    $query = "SELECT  COUNT(*) as order_count from order_history WHERE month(ordered_on) = month(now()) ORDER BY `id` ASC";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch();
+    $statement->closeCursor();
+    return $count;
+}
+
+function orders_pending()
+{
+    global $db;
+    $query = "SELECT  COUNT(*) as order_count from order_history WHERE delivered=0";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch();
+    $statement->closeCursor();
+    return $count;
+}
+
+function revenue_this_month()
+{
+    global $db;
+    $query = "SELECT sum(item_price*item_quantity) as total from order_items, order_history WHERE order_items.id = order_history.id and month(ordered_on) = month(now());";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch();
+    $statement->closeCursor();
+    return $count;
+}
+

@@ -26,16 +26,20 @@
                         <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;" href="javascript:$('#login').submit(); " >LogIn</a>
                     </form>
                 <?php else: ?>
-                    <span class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;"><i class="fas fa-user-circle" style="font-size:25px"></i>&nbsp;Profile</span>
+<!--                    <span class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;"><i class="fas fa-user-circle" style="font-size:25px"></i>&nbsp;Profile</span>-->
+
 
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="logout" style="display: flex">
                         <input type="hidden" name="action" value="logout">
                         <a class="btn btn-dark w-75 me-4 rounded-pill" style="display: flex;align-items: center;white-space: nowrap;" href="javascript:$('#logout').submit(); ">LogOut</a>
                     </form>
                     <?php if(isset($_SESSION['tokens'])): ?>
-                        <button type="button" class="btn btn-primary">
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+                        <button type="submit" class="btn btn-primary">
                             Tokens <span class="badge badge-light" style="background-color: brown;"><?= $_SESSION['tokens'] ?></span>
-                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="action" value="add_tokens">
+                        </button>
+                    </form>
                     <?php else: ?>
                         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" id="bills" style="display: flex">
                             <input type="hidden" name="action" value="bills">

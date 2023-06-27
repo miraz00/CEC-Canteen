@@ -33,6 +33,7 @@ require_once('../../../../includes/helpers.php');
     <link rel="stylesheet" href="../../assets/plugins/owl.carousel/dist/css/owl.carousel.min.css">
     <link href="../../assets/plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
     <!-- Chartist -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/plugins/chartist/css/chartist.min.css">
     <link href="../css/style.css" rel="stylesheet">
 
@@ -59,10 +60,10 @@ require_once('../../../../includes/helpers.php');
                         <ul aria-expanded="false">
                             <li><a href="admin.php">Admin Overview</a></li>
                             <li><a href="students.php">Students</a></li>
-                            <li><a href="employee.php">Employee Overview</a></li>
+                            <li><a href="employee.php">Bills</a></li>
                             <li><a href="menus.php">Menus</a></li>
-                            <li><a href="offers.php">Offer</a></li>
-                            <li><a href="reservation.php">Reservation</a></li>
+<!--                            <li><a href="offers.php">Offer</a></li>-->
+<!--                            <li><a href="reservation.php">Reservation</a></li>-->
                             <li><a href="employer.php">Employees</a></li>
                             
                             <li><a href="orders.php">Order</a></li>
@@ -92,10 +93,7 @@ require_once('../../../../includes/helpers.php');
                 <div class="col-sm-6 p-md-0">
                     <div class="breadcrumb-range-picker">
                         <span><i class="icon-calender"></i></span>
-                        <form action="../../../../index.php" method="post" id="logout" style="display: flex;">
-                            <input type="hidden" name="action" value="logout">
-                            <a class="btn badge-primary" style="display: flex;align-items: flex-end;white-space: nowrap;" href="javascript:$('#logout').submit(); ">LogOut</a>
-                        </form>
+
                     </div>
                 </div>
                
@@ -109,14 +107,11 @@ require_once('../../../../includes/helpers.php');
                     </div>
                     <div class="col-xl-9 col-xxl-9 col-lg-8 mt-4 mt-lg-0">
                         <div class="steps">
-                            <ul class="list-unstyled multi-steps">
-                                <li>Ordered</li>
-                                <li>Pending</li>
-                                <li class="is-active">Accept</li>
-                                <li>Delivery</li>
-                                <li>Received</li>
-                            </ul>
-                        </div> 
+                            <form action="../../../../index.php" method="post" id="logout" style="display: flex;">
+                                <input type="hidden" name="action" value="logout">
+                                <a class="btn badge-primary" style="display: flex;align-items: flex-end;white-space: nowrap;" href="javascript:$('#logout').submit(); ">LogOut</a>
+                            </form>
+                        </div>
                     </div>
     
                 </div>
@@ -128,15 +123,17 @@ require_once('../../../../includes/helpers.php');
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Order</h4>
+                                                <h4 class="text-muted mb-3">Orders</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>2,250</h2>
+                                                <?php $count = orders_this_month(); ?>
+                                                <h2><?= $count[0] ?></h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 6.365% </span>
-                                            <p> Since last month</p>
+                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> </span>
+                                            <p>Since last month</p>
+                                            <br>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -149,15 +146,18 @@ require_once('../../../../includes/helpers.php');
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Pending</h4>
+                                                <h4 class="text-muted mb-3">Pending Orders</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>2,250</h2>
+                                                <?php $count = orders_pending(); ?>
+                                                <h2><?= $count[0] ?></h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 2.65% </span>
-                                            <p> Since last month</p>
+                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> </span>
+                                            <p> </p>
+                                            <br>
+                                            <br>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -173,12 +173,14 @@ require_once('../../../../includes/helpers.php');
                                                 <h4 class="text-muted mb-3">Revenue</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>$2,250</h2>
+                                                <?php $count = revenue_this_month(); ?>
+                                                <h2>&#8377;<?= $count[0] ?></h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 23.65% </span>
-                                            <p> Since last month</p>
+                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> </span>
+                                            <p>Since last month</p>
+                                            <br>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -191,15 +193,18 @@ require_once('../../../../includes/helpers.php');
                                     <div class="card-body pb-0">
                                         <div class="row justify-content-between">
                                             <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Expense</h4>
+                                                <h4 class="text-muted mb-3">Users</h4>
                                             </div>
                                             <div class="col-auto">
-                                                <h2>$ 1,475</h2>
+                                                <?php $count = n_students() ?>
+                                                <h2>Student: <?= $count[0] ?> </h2>
+                                                <?php $count = n_teachers() ?>
+                                                <h2>Teacher: <?= $count [0]?></h2>
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 47.5% </span>
-                                            <p> Since last month</p>
+                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> </span>
+                                            <p> </p>
                                         </div>
                                     </div>
                                     <div class="chart-wrapper">
@@ -212,9 +217,9 @@ require_once('../../../../includes/helpers.php');
 
                     
                     <div class="col-xl-6 col-xxl-12">
-                        <div class="card">
+                        <div class="card" style="display: none;">
                             <div class="card-body">
-                                    <h4 class="card-title mb-4">Earnings</h4>
+                                <h4 class="card-title mb-4">Earnings</h4>
                                 <canvas id="earnings_bar_chart"></canvas>
                             </div>
                         </div>
@@ -227,12 +232,43 @@ require_once('../../../../includes/helpers.php');
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                    <h4 class="card-title">Restaurent Rating</h4>
-                                <div class="custom-tab-1">
+                                    <h4 class="card-title" style="margin-bottom: 1rem;">Canteen Review</h4>
+                                <div class="row">
+                                    <?php $reviews=get_reviews();
+                                    foreach ($reviews as $review): ?>
+
+                                    <div class="col-md-12">
+                                        <div class="media">
+                                            <i class="fa-solid fa-circle-user" style="color: #511f1f;font-size: 40px;"></i>
+                                            <div class="media-body ml-4">
+                                                <div class="d-flex justify-content-between">
+                                                    <strong><?= $review['name'] ?></strong>
+                                                    <div class="vertical-card__menu--rating c-pointer">
+                                                        <?php $count1=$review['rating']; $count2=5-$review['rating'];
+                                                        for($i=0; $i<$count1; $i++): ?>
+                                                            <span class="icon"><i class="fa fa-star"></i></span>
+                                                        <?php endfor ?>
+                                                        <?php for($i=0; $i<$count2; $i++): ?>
+                                                            <span class="icon"><i class="fa-regular fa-star"></i></span>
+                                                        <?php endfor ?>
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    <?= $review['review'] ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+
+                                </div>
+                                <div class="custom-tab-1" style="display: none;">
                                     <ul class="nav nav-tabs justify-content-end">
                                         <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#success1">Graph</a></li>
                                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#info1">Review</a></li>
                                     </ul>
+
+
                                     <div class="tab-content tab-content-default">
                                         <div class="tab-pane fade active show" id="success1" role="tabpanel">
                                             <div class="row justify-content-between">
@@ -247,7 +283,7 @@ require_once('../../../../includes/helpers.php');
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-primary" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
+                                                        </div>
                                                     </div>
                                                     <div class="mt-4">
                                                         <div class="d-flex justify-content-between">
@@ -256,7 +292,7 @@ require_once('../../../../includes/helpers.php');
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-info" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
+                                                        </div>
                                                     </div>
                                                     <div class="mt-4">
                                                         <div class="d-flex justify-content-between">
@@ -265,7 +301,7 @@ require_once('../../../../includes/helpers.php');
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-success" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
+                                                        </div>
                                                     </div>
                                                     <div class="mt-4">
                                                         <div class="d-flex justify-content-between">
@@ -274,7 +310,7 @@ require_once('../../../../includes/helpers.php');
                                                         </div>
                                                         <div class="progress mt-2" style="height: 9px;">
                                                             <div class="progress-bar bg-dark" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -369,7 +405,7 @@ require_once('../../../../includes/helpers.php');
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" style="display: none;">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Visit Hour</h4>
@@ -392,7 +428,7 @@ require_once('../../../../includes/helpers.php');
                 </div>
                 <div class="row">
 
-                    <div class="col-xl-4 col-lg-5 col-xxl-4">
+                    <div class="col-xl-4 col-lg-5 col-xxl-4" style="display: none;">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Timeline</h4>
@@ -448,7 +484,7 @@ require_once('../../../../includes/helpers.php');
                     
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-xxl-6">
+                    <div class="col-xl-4 col-lg-6 col-xxl-6" style="display: none;">
                         <div class="card top_menu_widget">
                             <div class="card-body">
                                 <h4 class="card-title">Top Menus</h4>
@@ -531,98 +567,21 @@ require_once('../../../../includes/helpers.php');
                     <div class="col-xl-4 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Ticket</h4>
+                                <h4 class="card-title">Feedback</h4>
                                 <div id="ticket">
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-danger">Delivery dealyed</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
+                                    <?php $feedbacks = get_feedbacks();
+                                    foreach ($feedbacks as $feedback):?>
+                                        <div class="media border-bottom pt-3 pb-3">
+                                            <strong><?= $feedback['time'] ?></strong>
+                                            <div class="media-body ml-3">
+                                                <a href="#">
+                                                    <h5 class="text-danger"><?= $feedback['name'] ?></h5>
+                                                    <p class="mb-0"><?= $feedback['feedback'] ?></p>
+                                                </a>
+                                            </div>
+                                            <!-- <span class="badge badge-warning">Pending</span> -->
                                         </div>
-                                        <!-- <span class="badge badge-warning">Pending</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-danger">Pizza rotten</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-success">Over price</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-primary">Open</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-primary">Want new Menu</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-danger">Want new Menu</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-info">Want new Menu</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-primary">Delivery Delayed</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-primary">Open</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-info">My order cencelled</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-warning">App not responding</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-warning">Pending</span> -->
-                                    </div>
+                                    <?php endforeach;?>
                                 </div>
                             </div>
                         </div>
@@ -630,7 +589,7 @@ require_once('../../../../includes/helpers.php');
                 </div>
     
                  
-                <div class="row">
+                <div class="row" style="display: none;">
                     
 
                     <div class="col-lg-12">
@@ -740,7 +699,7 @@ require_once('../../../../includes/helpers.php');
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
+            <div class="copyright" style="display: none">
                 <p><a href="templatespoint.net">Templates Point</a></p>
             </div>
         </div>

@@ -42,12 +42,12 @@
                         <ul aria-expanded="false">
                             <li><a href="admin.php">Admin Overview</a></li>
                             <li><a href="students.php">Students</a></li>
-                            <li><a href="employee.php">Employee Overview</a></li>
+                            <li><a href="employee.php">Bills</a></li>
                             <li><a href="menus.php">Menus</a></li>
-                            <li><a href="offers.php">Offer</a></li>
-                            <li><a href="reservation.php">Reservation</a></li>
+                            <!--                            <li><a href="offers.php">Offer</a></li>-->
+                            <!--                            <li><a href="reservation.php">Reservation</a></li>-->
                             <li><a href="employer.php">Employees</a></li>
-                            
+
                             <li><a href="orders.php">Order</a></li>
                             
                             
@@ -71,20 +71,7 @@
         ***********************************-->
         <div class="content-body">
 
-            <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="breadcrumb-range-picker">
-                        <span><i class="icon-calender"></i></span>
-                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>
-                    </div>
-                </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
-                    </ol>
-                </div>
-            </div>
+
             <!-- row -->
 
             <div class="container-fluid">
@@ -93,6 +80,14 @@
 						<h2 class="page-heading">Hi,Welcome Back!</h2>
 						<p class="mb-0">Your restaurent admin template</p>
 					</div>
+                    <div class="col-xl-9 col-xxl-9 col-lg-8 mt-4 mt-lg-0">
+                        <div class="steps">
+                            <form action="../../../../index.php" method="post" id="logout" style="display: flex;">
+                                <input type="hidden" name="action" value="logout">
+                                <a class="btn badge-primary" style="display: flex;align-items: flex-end;white-space: nowrap;" href="javascript:$('#logout').submit(); ">LogOut</a>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-12 col-xl-7">

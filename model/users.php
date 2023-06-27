@@ -196,3 +196,90 @@ function add_user_data($id, $username, $name, $email, $tokens)
     return $success;
 }
 
+function n_teachers()
+{
+    global $db;
+    $query = 'select count(*) as count from users where tokens IS NULL;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch();
+    $statement->closeCursor();
+
+    return $count;
+}
+function n_students()
+{
+    global $db;
+    $query = 'select count(*) as count from users where tokens IS NOT NULL;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch();
+    $statement->closeCursor();
+
+    return $count;
+}
+
+function get_reviews()
+{
+    global $db;
+    $query = 'select users.name, reviews.review ,rating from users,reviews where users.id=reviews.id order by reviews.time desc limit 4;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $reviews = $statement->fetchAll();
+    $statement->closeCursor();
+
+    return $reviews;
+}
+
+function get_feedbacks()
+{
+    global $db;
+    $query = 'select time,users.name, feedbacks.feedback from users,feedbacks where users.id=feedbacks.id order by time desc;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $feedbacks = $statement->fetchAll();
+    $statement->closeCursor();
+
+    return $feedbacks;
+}
+
+function get_employers()
+{
+    global $db;
+    $query = 'select *,date(Joined) as date from employers;';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $employers = $statement->fetchAll();
+    $statement->closeCursor();
+    return $employers;
+}
+
+function add_employee($name, $date)
+{
+    global $db;
+
+    $query = 'INSERT INTO employers (name, Joined) VALUES (:name, :date)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':date', $date);
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
+
+function update_feedback($text)
+{
+    global $db;
+
+    $query = 'INSERT INTO feedbacks (id,feedback) VALUES (:id,:text)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':text', $text);
+    $statement->bindValue(':id', $_SESSION['user_id']);
+
+    $success = $statement->execute();
+    $statement->closeCursor();
+
+    return $success;
+}
